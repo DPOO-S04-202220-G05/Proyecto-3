@@ -225,6 +225,11 @@ public class datos {
 	}
 
 
+	public ArrayList<equipo> obtenerEquiposFantasia() throws IOException{
+		return persistencia.ObtenerEquiposFantasia();
+	}
+	
+	
 	public jugador consultarJugador(String nombreJugador) throws IOException 
 	{
 		File ArchivoJugador = persistencia.consultarDatosJugador(nombreJugador);
@@ -748,4 +753,5 @@ public class datos {
 	public ArrayList<String> consultarFechasCerradas() throws IOException {
 		return this.persistencia.consultarFechasCerradas();
 	}
+	
 }

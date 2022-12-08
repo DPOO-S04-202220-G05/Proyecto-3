@@ -283,4 +283,7 @@ public class controller {
     		}
 		return 0;
     }
+    public ArrayList<equipo> obtenerEquiposFantasia() throws IOException{
+		return datos.obtenerEquiposFantasia();
+	}
 }

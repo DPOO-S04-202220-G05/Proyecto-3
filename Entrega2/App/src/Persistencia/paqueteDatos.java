@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.*;
 
 import Analizador.*;
@@ -1171,4 +1170,69 @@ public class paqueteDatos {
 		return vabien;
 	}
 	
+	public ArrayList<equipo> ObtenerEquiposFantasia() throws IOException
+	{
+		datos datos = new datos();
+		setPaths();
+		ArrayList<equipo> EquiposFantasia = new ArrayList<equipo>();
+		for (File file : CarpetaEquipos.listFiles()) 
+		{
+			BufferedReader bufferLectura = new BufferedReader(new FileReader(file));
+			String linea = bufferLectura.readLine();
+			linea = bufferLectura.readLine();
+			String[] datosEquipo = linea.split(",");
+			if(datosEquipo[6].equals("false"))
+			{
+				String nombreUsuario = datosEquipo[0];
+				String nombreEquipo = datosEquipo[1];
+				List<String> nombresjugadores = Arrays.asList(datosEquipo[2].split("-"));
+				ArrayList<jugador> Jugadores = new ArrayList<>();
+				for (String nombrej: nombresjugadores)
+				{
+					if (!nombrej.equals(""))
+					{
+						jugador j = datos.consultarJugador(nombrej);
+						if (!j.getNombre().equals(""))
+						{
+							Jugadores.add(j);
+						}
+					}
+				}
+				List<String> nombresTitulares = Arrays.asList(datosEquipo[3].split("-"));
+				ArrayList<jugador> Titulares = new ArrayList<>();
+				for (String nombret: nombresTitulares)
+				{
+					if (!nombret.equals(""))
+					{
+						jugador j = datos.consultarJugador(nombret);
+						if (!j.getNombre().equals(""))
+						{
+							Titulares.add(datos.consultarJugador(nombret));
+						}
+					}
+				}
+				float presupuestoE = Float.parseFloat(datosEquipo[4]);
+				int puntosE = Integer.parseInt(datosEquipo[5]);
+				boolean realE = Boolean.parseBoolean(datosEquipo[6]);
+				bufferLectura.close();
+				
+				equipo EquipoUsu = new equipo(nombreEquipo,nombreUsuario, realE, presupuestoE);
+				EquipoUsu.setPuntos(puntosE);
+				EquipoUsu.setJugadores(Jugadores);
+				EquipoUsu.setTitulares(Titulares);
+				if (!realE && datosEquipo.length>7)
+				{
+					jugador capitan = datos.consultarJugador(datosEquipo[7]);
+					if (capitan!=null)
+					{
+						EquipoUsu.setCapitan(capitan);
+					}
+				}
+				
+				EquiposFantasia.add(EquipoUsu);
+				
+			}
+		}
+		return EquiposFantasia;
+	}	
 }
