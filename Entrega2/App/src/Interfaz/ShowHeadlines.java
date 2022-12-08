@@ -19,12 +19,13 @@ import java.util.*;
 
 import Controller.controller;
 import Analizador.jugador;
+import Analizador.equipo;
 
 public class ShowHeadlines {
 	
 	private JFrame window;
 	
-	public ShowHeadlines(controller controller) throws IOException {
+	public ShowHeadlines(controller controller, equipo equipo) throws IOException {
 		window = new JFrame();
         window.setTitle("MY HEADLINES");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -42,8 +43,7 @@ public class ShowHeadlines {
         layout.gridy = 0;
         layout.insets = new Insets(0, 50, 50, 50);
         
-        String userName = controller.getUserName();
-        ArrayList<jugador> players = controller.consultarTitulares(userName);
+        ArrayList<jugador> players = controller.consultarTitulares(equipo);
         
         String col[] = {"POS", "NOMBRE"};
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
@@ -67,7 +67,7 @@ public class ShowHeadlines {
             @Override
             public void actionPerformed(ActionEvent e) {
             	MenuUser anterior;
-                anterior = new MenuUser(controller);
+                anterior = new MenuUser(controller, equipo);
                 anterior.show();
                 window.setVisible(false);
             }

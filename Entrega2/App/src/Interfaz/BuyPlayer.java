@@ -20,7 +20,7 @@ public class BuyPlayer {
     private JFrame window;
     private controller controlador;
 
-    public BuyPlayer(controller controller) throws IOException{
+    public BuyPlayer(controller controller, equipo equipo) throws IOException{
     	this.controlador=controller;
         window = new JFrame();
         window.setTitle("BUY PLAYER");
@@ -60,7 +60,7 @@ public class BuyPlayer {
         
         JTable table = new JTable(dm);
         table.getColumn("Button").setCellRenderer(new ButtonRenderer3());
-        table.getColumn("Button").setCellEditor(new ButtonEditor3(new JCheckBox()));
+        table.getColumn("Button").setCellEditor(new ButtonEditor3(new JCheckBox(), equipo));
 
         table.setPreferredScrollableViewportSize(table.getPreferredSize());//thanks mKorbel +1 http://stackoverflow.com/questions/10551995/how-to-set-jscrollpane-layout-to-be-the-same-as-jtable
 
@@ -78,7 +78,7 @@ public class BuyPlayer {
             @Override
             public void actionPerformed(ActionEvent e) {
             	MenuUser anterior;
-                anterior = new MenuUser(controller);
+                anterior = new MenuUser(controller, equipo);
                 anterior.show();
                 window.setVisible(false);
             }
@@ -126,9 +126,11 @@ class ButtonEditor3 extends DefaultCellEditor {
     protected JButton button;
     private String label;
     private boolean isPushed;
+    private equipo equipo;
 
-    public ButtonEditor3(JCheckBox checkBox) {
+    public ButtonEditor3(JCheckBox checkBox, equipo equipo) {
         super(checkBox);
+        this.equipo = equipo;
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
@@ -160,7 +162,7 @@ class ButtonEditor3 extends DefaultCellEditor {
     	controller controller = controlador;
         if (isPushed) {
         	try {
-				choosePlayer pestañaElegirJugador = new choosePlayer(controller, label);
+				choosePlayer pestañaElegirJugador = new choosePlayer(controller, label, equipo);
 				pestañaElegirJugador.show();
                 window.setVisible(false);
 			} catch (IOException e) {

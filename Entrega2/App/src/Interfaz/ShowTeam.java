@@ -19,12 +19,13 @@ import java.util.*;
 
 import Controller.controller;
 import Analizador.jugador;
+import Analizador.equipo;
 
 public class ShowTeam {
 	
 	private JFrame window;
 	
-	public ShowTeam(controller controller) throws IOException {
+	public ShowTeam(controller controller, equipo equipo) throws IOException {
 		window = new JFrame();
         window.setTitle("MY TEAM");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -42,8 +43,7 @@ public class ShowTeam {
         layout.gridy = 0;
         layout.insets = new Insets(0, 50, 50, 50);
         
-        String userName = controller.getUserName();
-        ArrayList<jugador> players = controller.consultarEquipo(userName);
+        ArrayList<jugador> players = controller.consultarJugadores(equipo);
         
         String col[] = {"POS", "NOMBRE"};
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
@@ -67,9 +67,19 @@ public class ShowTeam {
             @Override
             public void actionPerformed(ActionEvent e) {
             	MenuUser anterior;
-                anterior = new MenuUser(controller);
+                anterior = new MenuUser(controller, equipo);
                 anterior.show();
-                window.setVisible(false);
+                int puntos;
+                try {
+                    puntos = controller.actualizarPuntos(equipo);
+                    PopUps popup = new PopUps();
+                    popup.puntosUsuario(puntos);
+                    window.setVisible(false);
+                    window.setVisible(false);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
         

@@ -89,11 +89,6 @@ public class UserLogin {
 						TeamMenu menu = new TeamMenu(controller, nombreUsuario);
 						popUp.showInicioExitoso();
 						menu.show();
-				        int puntos = controller.actualizarPuntos();
-				        PopUps popup = new PopUps();
-				        popup.puntosUsuario(puntos);
-						window.setVisible(false);
-						
 					}
 					
 					else

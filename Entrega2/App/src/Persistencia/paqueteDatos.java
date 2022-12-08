@@ -182,8 +182,7 @@ public class paqueteDatos {
 		}
 		//Se crea, en la carpeta Usuarios, un csv con el siguiente nombre: "nombreUsuario-contraseniaUsuario.csv"
 		//Este contiene la info del usuario
-		File file = consultarDatosEquipo(nombreD);
-		file.delete();
+		
 		FileWriter csvWriter = new FileWriter(nombrecarpeta + "/" + nombreD + "-" + nombre +  ".csv");
 		if (!real) 
 		{
@@ -206,6 +205,34 @@ public class paqueteDatos {
 		csvWriter.flush();
 		csvWriter.close();
 		
+	}
+
+	public ArrayList<File> consultarDatosEquipos(String Nombre) throws IOException 
+	{
+		setPaths();
+		ArrayList<File> equiposUsuario = new ArrayList<>();
+		if (CarpetaEquipos.listFiles()!=null)
+		{
+			for (File file : CarpetaEquipos.listFiles()) 
+			{
+				String NombreArchivo = file.getName();
+				BufferedReader bufferLectura = new BufferedReader(new FileReader(CarpetaEquipos +"/" + NombreArchivo));
+				String linea = bufferLectura.readLine();
+				linea = bufferLectura.readLine();
+				String[] equipo = linea.split(",");
+				if(equipo[0].equals(Nombre)) 
+				{
+					bufferLectura.close();
+					equiposUsuario.add(file);
+				}
+				bufferLectura.close();
+			}
+
+			return equiposUsuario;
+		}
+		File file = new File("");
+		equiposUsuario.add(file);
+		return equiposUsuario;
 	}
 
 	public File consultarDatosEquipo(String Nombre) throws IOException 

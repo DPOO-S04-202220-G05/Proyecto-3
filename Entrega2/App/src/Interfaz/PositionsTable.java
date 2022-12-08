@@ -18,7 +18,7 @@ public class PositionsTable {
     private JFrame window;
     private controller controlador;
 
-    public PositionsTable(controller controller) throws IOException{
+    public PositionsTable(controller controller, equipo equipoUsuario) throws IOException{
         this.controlador = controller;
         window = new JFrame();
         window.setTitle("POSITIONS TABLE");
@@ -69,7 +69,7 @@ public class PositionsTable {
             @Override
             public void actionPerformed(ActionEvent e) {
             	menuEstadisticas anterior;
-                anterior = new menuEstadisticas(controller);
+                anterior = new menuEstadisticas(controller, equipoUsuario);
                 anterior.show();
                 window.setVisible(false);
             }

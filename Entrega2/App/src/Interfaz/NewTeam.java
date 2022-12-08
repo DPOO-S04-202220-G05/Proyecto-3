@@ -67,7 +67,7 @@ public class NewTeam {
 				}
             	PopUps popUp = new PopUps();
             	popUp.showCreacionEqExitoso();
-				MenuUser menu = new MenuUser(controller);
+				TeamMenu menu = new TeamMenu(controller, userName);
 				menu.show();
 				window.setVisible(false);
                

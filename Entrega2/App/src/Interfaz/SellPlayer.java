@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import Analizador.jugador;
+import Analizador.equipo;
 import Controller.controller;
 
 public class SellPlayer {
@@ -18,7 +19,7 @@ public class SellPlayer {
     private JFrame window;
     private controller controlador;
 
-    public SellPlayer(controller controller) throws IOException{
+    public SellPlayer(controller controller, equipo equipo) throws IOException{
     	this.controlador=controller;
         window = new JFrame();
         window.setTitle("Vender Jugador");
@@ -39,7 +40,7 @@ public class SellPlayer {
         layout.gridy = 0;
         panel.add(titulo,layout);
 
-        ArrayList<jugador> EquiposJugadores = controller.getJugadoresUsuario();
+        ArrayList<jugador> EquiposJugadores = controller.consultarJugadores(equipo);
         if(EquiposJugadores.size()==0) 
         {
             JLabel noplayers = new JLabel();
@@ -64,7 +65,7 @@ public class SellPlayer {
         
         JTable table = new JTable(dm);
         table.getColumn("Button").setCellRenderer(new ButtonRenderer2());
-        table.getColumn("Button").setCellEditor(new ButtonEditor2(new JCheckBox()));
+        table.getColumn("Button").setCellEditor(new ButtonEditor2(new JCheckBox(), equipo));
 
         table.setPreferredScrollableViewportSize(table.getPreferredSize());//thanks mKorbel +1 http://stackoverflow.com/questions/10551995/how-to-set-jscrollpane-layout-to-be-the-same-as-jtable
 
@@ -82,7 +83,7 @@ public class SellPlayer {
             @Override
             public void actionPerformed(ActionEvent e) {
             	MenuUser anterior;
-                anterior = new MenuUser(controller);
+                anterior = new MenuUser(controller, equipo);
                 anterior.show();
                 window.setVisible(false);
             }
@@ -130,9 +131,11 @@ class ButtonEditor2 extends DefaultCellEditor {
     protected JButton button;
     private String label;
     private boolean isPushed;
+    private equipo equipo;
 
-    public ButtonEditor2(JCheckBox checkBox) {
+    public ButtonEditor2(JCheckBox checkBox, equipo equipo) {
         super(checkBox);
+        this.equipo = equipo;
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
@@ -164,9 +167,9 @@ class ButtonEditor2 extends DefaultCellEditor {
     	controller controller = controlador;
         if (isPushed) {
         	try {
-				controller.venderJugador(label);
+				controller.venderJugador(label, equipo);
                 SellPlayer sellPlayer;
-				sellPlayer = new SellPlayer(controller);
+				sellPlayer = new SellPlayer(controller, equipo);
                 sellPlayer.show();
                 window.setVisible(false);
 	            JOptionPane.showMessageDialog(button, "Jugador vendido exitosamente");

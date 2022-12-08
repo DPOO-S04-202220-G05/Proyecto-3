@@ -57,9 +57,15 @@ public class TeamMenu {
 
             @Override
             public void actionPerformed(ActionEvent e) { 
-                UserTeams equiposUsuario = new UserTeams(controller, userName);
-                equiposUsuario.show();
-                window.setVisible(false);
+                UserTeams equiposUsuario;
+                try {
+                    equiposUsuario = new UserTeams(controller, userName);
+                    equiposUsuario.show();
+                    window.setVisible(false);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
             
         });

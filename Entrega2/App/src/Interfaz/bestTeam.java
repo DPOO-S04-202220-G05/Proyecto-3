@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import Analizador.equipo;
 import Controller.controller;
 
 public class bestTeam {
     
     private JFrame window;
 
-    public bestTeam(controller controller) throws IOException {
+    public bestTeam(controller controller, equipo equipo) throws IOException {
         window = new JFrame();
         window.setTitle("USER TYPE");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,7 +76,7 @@ public class bestTeam {
             @Override
             public void actionPerformed(ActionEvent e) {
             	menuEstadisticas anterior;
-                anterior = new menuEstadisticas(controller);
+                anterior = new menuEstadisticas(controller, equipo);
                 anterior.show();
                 window.setVisible(false);
             }

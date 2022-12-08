@@ -38,22 +38,28 @@ public class controller {
     {
 		return datos.obtenerMejorEquipoFecha(Fecha).replace(".txt", "");
     }
-    
+
+	public ArrayList<equipo> consultarEquipos(String userName) throws IOException
+    {
+    	ArrayList<equipo> teams = datos.consultarEquipos(userName);
+    	
+		return teams;
+    }
+    // POSIBLE ELIMINAR
     public ArrayList<jugador> consultarEquipo(String userName) throws IOException
     {
     	equipo team = datos.consultarEquipo(userName);
     	ArrayList<jugador> teamPlayers = consultarJugadores(team);
     	return teamPlayers;
     }
-    
+	
     public ArrayList<jugador> consultarJugadores(equipo equipo) throws IOException
     {
     	return datos.mostrarMisJugadores(equipo);
     }
 
-    public ArrayList<jugador> consultarTitulares(String userName) throws IOException
+    public ArrayList<jugador> consultarTitulares(equipo team) throws IOException
     {
-    	equipo team = datos.consultarEquipo(userName);
     	ArrayList<jugador> teamPlayers = datos.verMisTitulares(team);
     	return teamPlayers;
     }
@@ -69,9 +75,9 @@ public class controller {
         return datos.mostrarEquiposReales();
     }
     
-    public ArrayList<jugador> getJugadoresUsuario() throws IOException
+    public ArrayList<jugador> getJugadoresUsuario(equipo equipo) throws IOException
     {
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+    	this.EquipoUsu = equipo;
     	if (!EquipoUsu.getNombre().equals(""))
     	{
 			return (EquipoUsu.getJugadores());
@@ -87,18 +93,18 @@ public class controller {
 		return jugadores;
 	}
     
-    public void venderJugador(String numIntegrante) throws IOException
+    public void venderJugador(String numIntegrante, equipo equipo) throws IOException
     {
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+    	this.EquipoUsu = equipo;
     	ArrayList<jugador> JugadoresE = EquipoUsu.getJugadores();
     	jugador Integrante = JugadoresE.get(Integer.parseInt(numIntegrante)-1);
     	datos.venderJugador(EquipoUsu, Integrante);
     }
 
     
-    public void comprarJugador(String numIntegrante, ArrayList<jugador> jugadores) throws IOException
+    public void comprarJugador(String numIntegrante, ArrayList<jugador> jugadores, equipo equipo) throws IOException
     {
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+    	this.EquipoUsu = equipo;
     	jugador Comprado = jugadores.get(Integer.parseInt(numIntegrante)-1);
     	float PresuspuestoActual = EquipoUsu.getPresupuesto();
 		PopUps popup = new PopUps();
@@ -155,9 +161,9 @@ public class controller {
       return datos.obtenerTablaPosiciones();
     }
     
-    public ArrayList<String> jugadorconMasyMenosPuntos() throws IOException
+    public ArrayList<String> jugadorconMasyMenosPuntos(equipo equipo) throws IOException
     {
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+    	this.EquipoUsu = equipo;
 		HashMap<String, equipo> EquiposJugadores = datos.mostrarEquiposReales();
 		HashMap<Integer, String> PuntosDeJugador = new HashMap<Integer, String>(); 
 		int Mayor = 0;
@@ -201,10 +207,9 @@ public class controller {
 		return JugadorMenosyMas;
     }
     
-    public void elegirTitular(String seleccionN) throws IOException 
+    public void elegirTitular(String seleccionN, equipo equipo) throws IOException 
     {
-    	
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+		this.EquipoUsu = equipo;
     	ArrayList<jugador> Jugadores = (EquipoUsu.getJugadores());
     	jugador titularElegido = Jugadores.get(Integer.parseInt(seleccionN)-1);
     	PopUps popup = new PopUps();
@@ -221,9 +226,9 @@ public class controller {
     	
     }
     
-    public void elegirTitularTitularesLlenos(String titular, String titularAreemplazar) throws IOException
+    public void elegirTitularTitularesLlenos(String titular, String titularAreemplazar, equipo equipo) throws IOException
     {
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+		this.EquipoUsu = equipo;
     	ArrayList<jugador> Jugadores = (EquipoUsu.getJugadores());
     	jugador titularElegido = Jugadores.get(Integer.parseInt(titular)-1);
     	jugador JugadorViejo= EquipoUsu.getTitulares().get(Integer.parseInt(titularAreemplazar)-1);
@@ -241,9 +246,9 @@ public class controller {
     	
     }
     
-    public void elegirCapitan(String titular) throws IOException
+    public void elegirCapitan(String titular, equipo equipo) throws IOException
     {
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+    	this.EquipoUsu = equipo;
     	PopUps popup = new PopUps();
     	jugador JugadorCapitan=EquipoUsu.getTitulares().get(Integer.parseInt(titular)-1);
     	EquipoUsu.setCapitan(JugadorCapitan);
@@ -258,9 +263,9 @@ public class controller {
     	return calendar;
     }
 
-    public int actualizarPuntos() throws IOException
+    public int actualizarPuntos(equipo equipo) throws IOException
     {
-    	this.EquipoUsu = datos.consultarEquipo(nombUsu);
+    	this.EquipoUsu = equipo;
     	if (!EquipoUsu.getNombre().equals(""))
     		{
 	    		ArrayList<jugador> Titulares = (EquipoUsu.getTitulares());
