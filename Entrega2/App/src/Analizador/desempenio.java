@@ -135,5 +135,22 @@ public class desempenio {
 		return puntos;
 	}
     
+	public boolean gol()
+	{
+		if (this.goles>0)
+		{
+			return true;
+		}
+		return false;
+	}
+    
+	public boolean sesenta()
+	{
+		if (this.cantidaMinutos>60)
+		{
+			return true;
+		}
+		return false;
+	}
     
 }

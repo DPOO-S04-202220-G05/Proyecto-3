@@ -1,6 +1,6 @@
-"equipo";"jugador","1-cantidadMinutos","2-goles","3-penaltis","4-autogoles","5-asistencias","6-golesRecibidos","7-penaltisRecibidos","8-penaltisAtajados","9-penaltisErrados","10-tarjetasAmarillas","11-tarjetasRojas"
-Parma,Borussia Dortmund,04/01/2022,15:30,1
-Parma;L. Margueron,90,0,0,0,0,2,0,0,0,0,0
+equipo;"jugador,""1-cantidadMinutos"",""2-goles"",""3-penaltis"",""4-autogoles"",""5-asistencias"",""6-golesRecibidos"",""7-penaltisRecibidos"",""8-penaltisAtajados"",""9-penaltisErrados"",""10-tarjetasAmarillas"",""11-tarjetasRojas"""
+Parma,Borussia Dortmund,04/01/2022,15:30,1;
+Parma;L. Margueron,90,1,0,0,0,2,0,0,0,0,0
 Parma;Yao Daogang,90,0,0,0,0,2,0,0,0,1,0
 Parma;Jeong Dong Ho,60,0,0,0,0,2,0,0,0,0,1
 Parma;V. Latinovich,90,0,0,0,0,2,0,0,0,0,0

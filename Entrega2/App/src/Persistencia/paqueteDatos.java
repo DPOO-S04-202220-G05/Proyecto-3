@@ -566,6 +566,10 @@ public class paqueteDatos {
 					HashMap<String, desempenio> equipoVisitante = partido.getdesemepenioEquipoVisitante();
 					HashMap<String, Integer> puntosJugadoresLocales = new HashMap<>();
 					HashMap<String, Integer> puntosJugadoresVisitantes = new HashMap<>();
+					HashMap<String, Boolean> golJugadoresLocales = new HashMap<>();
+					HashMap<String, Boolean> golJugadoresVisitantes = new HashMap<>();
+					HashMap<String, Boolean> sesentaJugadoresLocales = new HashMap<>();
+					HashMap<String, Boolean> sesentaJugadoresVisitantes = new HashMap<>();
 					int puntosLocal = 0;
 					int puntosVisitantes = 0;
 					String ganador;
@@ -580,6 +584,11 @@ public class paqueteDatos {
 							jugador jugadorj = datos.consultarJugador(nombre);
 							String posicion = jugadorj.getPosicion();
 							int puntosj = desempenioj.calculadoraPuntos(posicion);
+							boolean gol = desempenioj.gol();
+							boolean sesenta = desempenioj.sesenta();
+							
+							golJugadoresLocales.put(nombre, gol);
+							sesentaJugadoresLocales.put(nombre, sesenta);
 							puntosJugadoresLocales.put(nombre, puntosj);
 							puntosLocal += puntosj;
 						}
@@ -591,6 +600,11 @@ public class paqueteDatos {
 							jugador jugadorj = datos.consultarJugador(nombre);
 							String posicion = jugadorj.getPosicion();
 							int puntosj = desempenioj.calculadoraPuntos(posicion);
+							boolean gol = desempenioj.gol();
+							boolean sesenta = desempenioj.sesenta();
+							
+							golJugadoresVisitantes.put(nombre, gol);
+							sesentaJugadoresVisitantes.put(nombre, sesenta);
 							puntosJugadoresVisitantes.put(nombre, puntosj);
 							puntosVisitantes += puntosj;
 						}
@@ -620,8 +634,10 @@ public class paqueteDatos {
 					for(String nombre: nombresl)
 					{
 						int puntosJugador = puntosJugadoresLocales.get(nombre);
+						boolean golJugador = golJugadoresLocales.get(nombre);
+						boolean sesentaJugador = sesentaJugadoresLocales.get(nombre);
 
-						csvWriter.append(nombreEquipoLocal + ";" + nombre + "," + puntosJugador);
+						csvWriter.append(nombreEquipoLocal + ";" + nombre + "," + puntosJugador + "," + golJugador + "," +sesentaJugador);
 						csvWriter.append("\n");
 
 					}
@@ -629,8 +645,10 @@ public class paqueteDatos {
 					for(String nombre: nombresv)
 					{
 						int puntosJugador = puntosJugadoresVisitantes.get(nombre);
+						boolean golJugador = golJugadoresVisitantes.get(nombre);
+						boolean sesentaJugador = sesentaJugadoresVisitantes.get(nombre);
 
-						csvWriter.append(nombreEquipoVisitante + ";" + nombre + "," + puntosJugador);
+						csvWriter.append(nombreEquipoVisitante + ";" + nombre + "," + puntosJugador + "," + golJugador + "," + sesentaJugador);
 						csvWriter.append("\n");
 					}
 
@@ -654,6 +672,10 @@ public class paqueteDatos {
 				HashMap<String, desempenio> equipoVisitante = partido.getdesemepenioEquipoVisitante();
 				HashMap<String, Integer> puntosJugadoresLocales = new HashMap<>();
 				HashMap<String, Integer> puntosJugadoresVisitantes = new HashMap<>();
+				HashMap<String, Boolean> golJugadoresLocales = new HashMap<>();
+				HashMap<String, Boolean> golJugadoresVisitantes = new HashMap<>();
+				HashMap<String, Boolean> sesentaJugadoresLocales = new HashMap<>();
+				HashMap<String, Boolean> sesentaJugadoresVisitantes = new HashMap<>();
 				int puntosLocal = 0;
 				int puntosVisitantes = 0;
 				String ganador;
@@ -668,6 +690,23 @@ public class paqueteDatos {
 						jugador jugadorj = datos.consultarJugador(nombre);
 						String posicion = jugadorj.getPosicion();
 						int puntosj = desempenioj.calculadoraPuntos(posicion);
+						boolean gol = desempenioj.gol();
+						boolean sesenta = desempenioj.sesenta();
+						if (fecha>2) 
+						{
+							if (consultarTresGoles(fecha,nombreEquipoVisitante,nombre)&& gol) 
+							{
+								puntosj+=10;
+							}
+							if (consultarSesentaMinutos(fecha,nombreEquipoVisitante,nombre)&& sesenta) 
+							{
+								puntosj+=5;
+							}
+							
+						} 
+						
+						golJugadoresLocales.put(nombre, gol);
+						sesentaJugadoresLocales.put(nombre, sesenta);
 						puntosJugadoresLocales.put(nombre, puntosj);
 						puntosLocal += puntosj;
 					}
@@ -679,6 +718,22 @@ public class paqueteDatos {
 						jugador jugadorj = datos.consultarJugador(nombre);
 						String posicion = jugadorj.getPosicion();
 						int puntosj = desempenioj.calculadoraPuntos(posicion);
+						boolean gol = desempenioj.gol();
+						boolean sesenta = desempenioj.sesenta();
+						if (fecha>2) 
+						{
+							if (consultarTresGoles(fecha,nombreEquipoVisitante,nombre)&& gol) 
+							{
+								puntosj+=10;
+							}
+							if (consultarSesentaMinutos(fecha,nombreEquipoVisitante,nombre)&& sesenta) 
+							{
+								puntosj+=5;
+							}
+						} 
+						
+						golJugadoresVisitantes.put(nombre, gol);
+						sesentaJugadoresVisitantes.put(nombre, sesenta);
 						puntosJugadoresVisitantes.put(nombre, puntosj);
 						puntosVisitantes += puntosj;
 					}
@@ -708,8 +763,10 @@ public class paqueteDatos {
 				for(String nombre: nombresl)
 				{
 					int puntosJugador = puntosJugadoresLocales.get(nombre);
+					boolean golJugador = golJugadoresLocales.get(nombre);
+					boolean sesentaJugador = sesentaJugadoresLocales.get(nombre);
 
-					csvWriter.append(nombreEquipoLocal + ";" + nombre + "," + puntosJugador);
+					csvWriter.append(nombreEquipoLocal + ";" + nombre + "," + puntosJugador + "," + golJugador + "," + sesentaJugador);
 					csvWriter.append("\n");
 
 				}
@@ -717,8 +774,10 @@ public class paqueteDatos {
 				for(String nombre: nombresv)
 				{
 					int puntosJugador = puntosJugadoresVisitantes.get(nombre);
+					boolean golJugador = golJugadoresVisitantes.get(nombre);
+					boolean sesentaJugador = sesentaJugadoresVisitantes.get(nombre);
 
-					csvWriter.append(nombreEquipoVisitante + ";" + nombre + "," + puntosJugador);
+					csvWriter.append(nombreEquipoVisitante + ";" + nombre + "," + puntosJugador + "," + golJugador + "," + sesentaJugador);
 					csvWriter.append("\n");
 				}
 
@@ -748,6 +807,10 @@ public class paqueteDatos {
 				HashMap<String, desempenio> equipoVisitante = partido.getdesemepenioEquipoVisitante();
 				HashMap<String, Integer> puntosJugadoresLocales = new HashMap<>();
 				HashMap<String, Integer> puntosJugadoresVisitantes = new HashMap<>();
+				HashMap<String, Boolean> golJugadoresLocales = new HashMap<>();
+				HashMap<String, Boolean> golJugadoresVisitantes = new HashMap<>();
+				HashMap<String, Boolean> sesentaJugadoresLocales = new HashMap<>();
+				HashMap<String, Boolean> sesentaJugadoresVisitantes = new HashMap<>();
 				int puntosLocal = 0;
 				int puntosVisitantes = 0;
 				String ganador;
@@ -762,6 +825,23 @@ public class paqueteDatos {
 						jugador jugadorj = datos.consultarJugador(nombre);
 						String posicion = jugadorj.getPosicion();
 						int puntosj = desempenioj.calculadoraPuntos(posicion);
+						boolean gol = desempenioj.gol();
+						boolean sesenta = desempenioj.sesenta();
+						if (fecha>2) 
+						{
+							if (consultarTresGoles(fecha,nombreEquipoVisitante,nombre)&& gol) 
+							{
+								puntosj+=10;
+							}
+							if (consultarSesentaMinutos(fecha,nombreEquipoVisitante,nombre)&& sesenta) 
+							{
+								puntosj+=5;
+							}
+							
+						} 
+						
+						golJugadoresLocales.put(nombre, gol);
+						sesentaJugadoresLocales.put(nombre, sesenta);
 						puntosJugadoresLocales.put(nombre, puntosj);
 						puntosLocal += puntosj;
 					}
@@ -773,6 +853,23 @@ public class paqueteDatos {
 						jugador jugadorj = datos.consultarJugador(nombre);
 						String posicion = jugadorj.getPosicion();
 						int puntosj = desempenioj.calculadoraPuntos(posicion);
+						boolean gol = desempenioj.gol();
+						boolean sesenta = desempenioj.sesenta();
+						if (fecha>2) 
+						{
+							if (consultarTresGoles(fecha,nombreEquipoVisitante,nombre)&& gol) 
+							{
+								puntosj+=10;
+							}
+							if (consultarSesentaMinutos(fecha,nombreEquipoVisitante,nombre)&& sesenta) 
+							{
+								puntosj+=5;
+							}
+							
+						} 
+						
+						golJugadoresVisitantes.put(nombre, gol);
+						sesentaJugadoresVisitantes.put(nombre, sesenta);
 						puntosJugadoresVisitantes.put(nombre, puntosj);
 						puntosVisitantes += puntosj;
 					}
@@ -802,8 +899,10 @@ public class paqueteDatos {
 				for(String nombre: nombresl)
 				{
 					int puntosJugador = puntosJugadoresLocales.get(nombre);
+					boolean golJugador = golJugadoresLocales.get(nombre);
+					boolean sesentaJugador = sesentaJugadoresLocales.get(nombre);
 
-					csvWriter.append(nombreEquipoLocal + ";" + nombre + "," + puntosJugador);
+					csvWriter.append(nombreEquipoLocal + ";" + nombre + "," + puntosJugador + "," + golJugador + "," + sesentaJugador);
 					csvWriter.append("\n");
 
 				}
@@ -811,8 +910,10 @@ public class paqueteDatos {
 				for(String nombre: nombresv)
 				{
 					int puntosJugador = puntosJugadoresVisitantes.get(nombre);
+					boolean golJugador = golJugadoresVisitantes.get(nombre);
+					boolean sesentaJugador = sesentaJugadoresVisitantes.get(nombre);
 
-					csvWriter.append(nombreEquipoVisitante + ";" + nombre + "," + puntosJugador);
+					csvWriter.append(nombreEquipoVisitante + ";" + nombre + "," + puntosJugador + "," + golJugador + "," + sesentaJugador);
 					csvWriter.append("\n");
 				}
 
@@ -974,6 +1075,100 @@ public class paqueteDatos {
 		}
 		File file = new File("");
 		return "";
+	}
+	
+	public boolean consultarTresGoles(int numeroFechaActual, String nombreEquipo, String nombreJ) throws IOException
+	{
+		setPaths();
+		int centinela = 1;
+		boolean vabien = false;
+		while (centinela!=3)
+		{
+		String nombreCarpeta = CarpetaFechas.getPath() + "/Fecha" + (numeroFechaActual-centinela);
+		File carpetaFecha = new File(nombreCarpeta);
+		if (carpetaFecha.listFiles()!=null)
+		{
+			for (File file : carpetaFecha.listFiles()) 
+			{
+				String NombreArchivo = file.getName();
+				ArrayList<String> Separacion = new ArrayList<String>(Arrays.asList(NombreArchivo.split("_")));
+				ArrayList<String> NombresEquiposPartido = new ArrayList<String>(Arrays.asList((Separacion.get(0)).split("-")));
+				if((nombreEquipo.equals(NombresEquiposPartido.get(0)))||(nombreEquipo.equals(NombresEquiposPartido.get(1))))
+				{
+					BufferedReader bufferLecturaPartido = new BufferedReader(new FileReader(nombreCarpeta+"/"+NombreArchivo));
+					String linea;
+					String gol ="";
+					bufferLecturaPartido.readLine();
+					while((linea = bufferLecturaPartido.readLine()) != null)
+					{
+						String[] separador = linea.split(";");
+						String[] datos = separador[1].split(",");
+						String nombre = datos[0];
+						if(nombre.equals(nombreJ))
+						{
+							gol = datos[2];
+							if(gol.equals("true"))
+							{
+								vabien = true;
+							}
+							
+						}
+					}
+					bufferLecturaPartido.close();
+				}
+			}
+			
+		}
+		centinela+=1;
+		}
+		return vabien;
+	}
+	
+	public boolean consultarSesentaMinutos(int numeroFechaActual, String nombreEquipo, String nombreJ) throws IOException
+	{
+		setPaths();
+		int centinela = 1;
+		boolean vabien = false;
+		while (centinela!=3)
+		{
+		String nombreCarpeta = CarpetaFechas.getPath() + "/Fecha" + (numeroFechaActual-centinela);
+		File carpetaFecha = new File(nombreCarpeta);
+		if (carpetaFecha.listFiles()!=null)
+		{
+			for (File file : carpetaFecha.listFiles()) 
+			{
+				String NombreArchivo = file.getName();
+				ArrayList<String> Separacion = new ArrayList<String>(Arrays.asList(NombreArchivo.split("_")));
+				ArrayList<String> NombresEquiposPartido = new ArrayList<String>(Arrays.asList((Separacion.get(0)).split("-")));
+				if((nombreEquipo.equals(NombresEquiposPartido.get(0)))||(nombreEquipo.equals(NombresEquiposPartido.get(1))))
+				{
+					BufferedReader bufferLecturaPartido = new BufferedReader(new FileReader(nombreCarpeta+"/"+NombreArchivo));
+					String linea;
+					String sesenta ="";
+					bufferLecturaPartido.readLine();
+					while((linea = bufferLecturaPartido.readLine()) != null)
+					{
+						String[] separador = linea.split(";");
+						String[] datos = separador[1].split(",");
+						String nombre = datos[0];
+						if(nombre.equals(nombreJ))
+						{
+							sesenta = datos[3];
+							if(sesenta.equals("true"))
+							{
+								vabien = true;
+							}
+							
+						}
+					}
+					bufferLecturaPartido.close();
+				}
+			}
+			
+		}
+		centinela+=1;
+		}
+		return vabien;
 	}
 	
 }

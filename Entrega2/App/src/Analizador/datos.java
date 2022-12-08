@@ -109,7 +109,7 @@ public class datos {
 		String equipoLocal = partidoInfo[0];
 		String equipoVisitante = partidoInfo[1];
 		String fechaFormat = partidoInfo[2] + "&" + partidoInfo[3];
-		int fecha = Integer.parseInt(partidoInfo[4]);
+		int fecha = Integer.parseInt(partidoInfo[4].replace(";", ""));
 
 		HashMap<String, desempenio> desempenioEquipoLocal = new HashMap<>();
 		HashMap<String, desempenio> desempenioEquipoVisitante = new HashMap<>();
