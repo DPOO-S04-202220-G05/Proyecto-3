@@ -5,25 +5,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import Analizador.equipo;
 import Controller.controller;
+import Analizador.equipo;
 
-public class BuyPlayer {
-    
+public class UserTeams {
+
     private JFrame window;
     private controller controlador;
 
-    public BuyPlayer(controller controller, equipo equipo) throws IOException{
-    	this.controlador=controller;
+    public UserTeams(controller controller, String userName) throws IOException{
+
+        controlador = controller;
+
         window = new JFrame();
-        window.setTitle("BUY PLAYER");
+        window.setTitle("USER TEAMS");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setSize(600, 600);
         window.setLocationRelativeTo(null);
@@ -34,6 +34,11 @@ public class BuyPlayer {
         panel.setLayout(new GridBagLayout());
         GridBagConstraints layout = new GridBagConstraints();
 
+        layout.fill = GridBagConstraints.HORIZONTAL;
+        layout.gridx = 0;
+        layout.gridy = 0;
+        layout.insets = new Insets(0, 50, 50, 50);
+
         JLabel titulo = new JLabel();
         titulo.setText("Elegir Equipo");
         layout.fill = GridBagConstraints.HORIZONTAL;
@@ -41,15 +46,13 @@ public class BuyPlayer {
         layout.gridy = 0;
         panel.add(titulo,layout);
 
-        HashMap<String, equipo> EquiposJugadores = controller.mostrarEquiposReales();
-		Set<String> Llaves = EquiposJugadores.keySet();
-		ArrayList<String> NombresJ = new ArrayList<>(Llaves);
+        ArrayList<equipo> EquiposUsuario = controller.consultarEquipos(userName);
         
-        Object[][] matriz = new Object[EquiposJugadores.size()][];
+        Object[][] matriz = new Object[EquiposUsuario.size()][];
         int centinela = 0;
-        for(String nombreJ: NombresJ)
+        for(equipo equipo: EquiposUsuario)
         {
-        	Object[] fila = {Integer.toString(centinela+1),nombreJ};
+        	Object[] fila = {Integer.toString(centinela+1),equipo.getNombre()};
         	matriz[centinela] = fila;
         	centinela+=1;
         }
@@ -59,8 +62,8 @@ public class BuyPlayer {
 
         
         JTable table = new JTable(dm);
-        table.getColumn("Button").setCellRenderer(new ButtonRenderer3());
-        table.getColumn("Button").setCellEditor(new ButtonEditor3(new JCheckBox(), equipo));
+        table.getColumn("Button").setCellRenderer((TableCellRenderer) new ButtonRenderer3());
+        table.getColumn("Button").setCellEditor(new ButtonEditor3(new JCheckBox(), EquiposUsuario));
 
         table.setPreferredScrollableViewportSize(table.getPreferredSize());//thanks mKorbel +1 http://stackoverflow.com/questions/10551995/how-to-set-jscrollpane-layout-to-be-the-same-as-jtable
 
@@ -77,8 +80,8 @@ public class BuyPlayer {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-            	MenuUser anterior;
-                anterior = new MenuUser(controller, equipo);
+            	TeamMenu anterior;
+                anterior = new TeamMenu(controller, userName);
                 anterior.show();
                 window.setVisible(false);
             }
@@ -126,11 +129,11 @@ class ButtonEditor3 extends DefaultCellEditor {
     protected JButton button;
     private String label;
     private boolean isPushed;
-    private equipo equipo;
+    private ArrayList<equipo> equipos;
 
-    public ButtonEditor3(JCheckBox checkBox, equipo equipo) {
+    public ButtonEditor3(JCheckBox checkBox, ArrayList<equipo> EquiposUsuario) {
         super(checkBox);
-        this.equipo = equipo;
+        this.equipos = EquiposUsuario;
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
@@ -161,14 +164,10 @@ class ButtonEditor3 extends DefaultCellEditor {
     public Object getCellEditorValue() {
     	controller controller = controlador;
         if (isPushed) {
-        	try {
-				choosePlayer pestañaElegirJugador = new choosePlayer(controller, label, equipo);
-				pestañaElegirJugador.show();
+				equipo equipo = equipos.get(Integer.parseInt(label)-1);
+                MenuUser menu = new MenuUser(controller, equipo);
+                menu.show();
                 window.setVisible(false);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
         }
         isPushed = false;
         return label;
@@ -181,5 +180,3 @@ class ButtonEditor3 extends DefaultCellEditor {
     }
 }
 }
-
-

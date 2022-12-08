@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import Analizador.equipo;
 import Analizador.jugador;
 import Controller.controller;
 import Interfaz.ConfigurarAlineacion.ButtonEditor2;
@@ -32,7 +33,7 @@ public class AuxConfigurarAlin {
 	 private controller controlador;
 	 private String titularYaElegido;
 	 private JFrame ventana;
-	 public AuxConfigurarAlin(controller controller, String titularElegido, JFrame pestaniaAnterior) throws IOException{
+	 public AuxConfigurarAlin(controller controller, String titularElegido, JFrame pestaniaAnterior, equipo equipo) throws IOException{
 		 this.controlador=controller;
 		 this.titularYaElegido = titularElegido;
 		 this.ventana = pestaniaAnterior;
@@ -55,8 +56,7 @@ public class AuxConfigurarAlin {
 	     layout.gridy = 0;
 	     panel.add(titulo,layout);
 	     
-	     String UsuarioN = controller.getUserName();
-	     ArrayList<jugador> EquiposJugadores = controller.consultarTitulares(UsuarioN);
+	     ArrayList<jugador> EquiposJugadores = controller.consultarTitulares(equipo);
 	     
 	        if(EquiposJugadores.size()==0) 
 	        {
@@ -84,7 +84,7 @@ public class AuxConfigurarAlin {
 	        
 	        JTable table = new JTable(dm);
 	        table.getColumn("Button").setCellRenderer(new ButtonRenderer2());
-	        table.getColumn("Button").setCellEditor(new ButtonEditor2(new JCheckBox()));
+	        table.getColumn("Button").setCellEditor(new ButtonEditor2(new JCheckBox(), equipo));
 
 	        table.setPreferredScrollableViewportSize(table.getPreferredSize());//thanks mKorbel +1 http://stackoverflow.com/questions/10551995/how-to-set-jscrollpane-layout-to-be-the-same-as-jtable
 
@@ -102,7 +102,7 @@ public class AuxConfigurarAlin {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	MenuUser anterior;
-	                anterior = new MenuUser(controller);
+	                anterior = new MenuUser(controller, equipo);
 	                anterior.show();
 	                window.setVisible(false);
 	            }
@@ -150,9 +150,11 @@ public class AuxConfigurarAlin {
 	    protected JButton button;
 	    private String label;
 	    private boolean isPushed;
+		private equipo equipo;
 
-	    public ButtonEditor2(JCheckBox checkBox) {
+	    public ButtonEditor2(JCheckBox checkBox, equipo equipo) {
 	        super(checkBox);
+			this.equipo = equipo;
 	        button = new JButton();
 	        button.setOpaque(true);
 	        button.addActionListener(new ActionListener() {
@@ -187,7 +189,7 @@ public class AuxConfigurarAlin {
 	        if (isPushed) {
 	        	try {
 	        		
-	        		controller.elegirTitularTitularesLlenos(titular, label);
+	        		controller.elegirTitularTitularesLlenos(titular, label, equipo);
 	        		window.setVisible(false);
 	        		anteriorPestania.setVisible(true);
 				} catch (IOException e) {

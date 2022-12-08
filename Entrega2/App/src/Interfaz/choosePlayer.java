@@ -34,7 +34,7 @@ public class choosePlayer {
     private JFrame window;
     private controller controlador;
 
-    public choosePlayer(controller controller, String EquipoElegido) throws IOException{
+    public choosePlayer(controller controller, String EquipoElegido, equipo equipoUsuario) throws IOException{
     	this.controlador=controller;
         window = new JFrame();
         window.setTitle("BUY PLAYER");
@@ -77,7 +77,7 @@ public class choosePlayer {
         
         JTable table = new JTable(dm);
         table.getColumn("Button").setCellRenderer(new ButtonRenderer4());
-        table.getColumn("Button").setCellEditor(new ButtonEditor4(new JCheckBox(), jugadoresE));
+        table.getColumn("Button").setCellEditor(new ButtonEditor4(new JCheckBox(), jugadoresE, equipoUsuario));
 
         table.setPreferredScrollableViewportSize(table.getPreferredSize());//thanks mKorbel +1 http://stackoverflow.com/questions/10551995/how-to-set-jscrollpane-layout-to-be-the-same-as-jtable
 
@@ -96,7 +96,7 @@ public class choosePlayer {
             public void actionPerformed(ActionEvent e) {
             	BuyPlayer anterior;
                 try {
-					anterior = new BuyPlayer(controller);
+					anterior = new BuyPlayer(controller, equipoUsuario);
 	                anterior.show();
 	                window.setVisible(false);
 				} catch (IOException e1) {
@@ -149,9 +149,11 @@ class ButtonEditor4 extends DefaultCellEditor {
     private String label;
     private boolean isPushed;
     private ArrayList<jugador> jugadores;
+    private equipo equipoUsuario;
 
-    public ButtonEditor4(JCheckBox checkBox, ArrayList<jugador> equipo) {
+    public ButtonEditor4(JCheckBox checkBox, ArrayList<jugador> equipo, equipo equipoUsuario) {
         super(checkBox);
+        this.equipoUsuario = equipoUsuario;
         this.jugadores=equipo;
         button = new JButton();
         button.setOpaque(true);
@@ -184,7 +186,7 @@ class ButtonEditor4 extends DefaultCellEditor {
     	controller controller = controlador;
         if (isPushed) {
         	try {
-				controller.comprarJugador(label,jugadores);
+				controller.comprarJugador(label,jugadores, equipoUsuario);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

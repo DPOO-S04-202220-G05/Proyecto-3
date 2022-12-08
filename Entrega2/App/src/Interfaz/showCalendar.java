@@ -17,12 +17,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Analizador.equipo;
 import Controller.controller;
 
 public class showCalendar {
 	private JFrame window;
 	
-	public showCalendar(controller controller) throws IOException{
+	public showCalendar(controller controller, equipo equipo) throws IOException{
 		 
 		 window = new JFrame();
 	     window.setTitle("Calendario");
@@ -71,7 +73,7 @@ public class showCalendar {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	MenuUser anterior;
-	                anterior = new MenuUser(controller);
+	                anterior = new MenuUser(controller, equipo);
 	                anterior.show();
 	                window.setVisible(false);
 	            }

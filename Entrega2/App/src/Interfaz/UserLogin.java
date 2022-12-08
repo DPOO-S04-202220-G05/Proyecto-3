@@ -86,14 +86,9 @@ public class UserLogin {
 					if(controller.iniciarSesion(nombreUsuario, contrasenia, "UsuarioN"))
 					{
 						
-						MenuUser menu = new MenuUser(controller);
+						TeamMenu menu = new TeamMenu(controller, nombreUsuario);
 						popUp.showInicioExitoso();
 						menu.show();
-				        int puntos = controller.actualizarPuntos();
-				        PopUps popup = new PopUps();
-				        popup.puntosUsuario(puntos);
-						window.setVisible(false);
-						
 					}
 					
 					else

@@ -156,6 +156,25 @@ public class datos {
 
 	}
 
+	public ArrayList<equipo> consultarEquipos(String nombreUsuario) throws IOException 
+	{
+		ArrayList<File> ArchivoEquipos = persistencia.consultarDatosEquipos(nombreUsuario);
+		ArrayList<equipo> EquiposUsuario = new ArrayList<>();
+
+		for (File equipo : ArchivoEquipos){
+			equipo EquipoUsu;
+			if (equipo.getName().equals(""))
+			{
+				EquipoUsu= new equipo("",nombreUsuario,false,0);
+				EquiposUsuario.add(EquipoUsu);
+			}
+			EquipoUsu = convertirArchivoEquipo(equipo);
+			EquiposUsuario.add(EquipoUsu);
+		}
+
+		return EquiposUsuario;
+	}
+
 
 	public equipo consultarEquipo(String nombreUsuario) throws IOException 
 	{

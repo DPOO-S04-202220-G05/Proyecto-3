@@ -23,6 +23,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import Analizador.equipo;
 import Analizador.jugador;
 import Controller.controller;
 import Interfaz.SellPlayer.ButtonEditor2;
@@ -33,7 +34,7 @@ public class ConfigurarAlineacion {
 	 private JFrame window;
 	 private controller controlador;
 	 
-	 public ConfigurarAlineacion(controller controller) throws IOException{
+	 public ConfigurarAlineacion(controller controller, equipo equipo) throws IOException{
 		 this.controlador=controller;
 		 window = new JFrame();
 	     window.setTitle("Configurar Alineación");
@@ -54,7 +55,7 @@ public class ConfigurarAlineacion {
 	     layout.gridy = 0;
 	     panel.add(titulo,layout);
 	     
-	     ArrayList<jugador> EquiposJugadores = controller.getJugadoresUsuario();
+	     ArrayList<jugador> EquiposJugadores = controller.consultarJugadores(equipo);
 	     
 	        if(EquiposJugadores.size()==0) 
 	        {
@@ -82,7 +83,7 @@ public class ConfigurarAlineacion {
 	        
 	        JTable table = new JTable(dm);
 	        table.getColumn("Button").setCellRenderer(new ButtonRenderer2());
-	        table.getColumn("Button").setCellEditor(new ButtonEditor2(new JCheckBox()));
+	        table.getColumn("Button").setCellEditor(new ButtonEditor2(new JCheckBox(), equipo));
 
 	        table.setPreferredScrollableViewportSize(table.getPreferredSize());//thanks mKorbel +1 http://stackoverflow.com/questions/10551995/how-to-set-jscrollpane-layout-to-be-the-same-as-jtable
 
@@ -100,7 +101,7 @@ public class ConfigurarAlineacion {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	MenuUser anterior;
-	                anterior = new MenuUser(controller);
+	                anterior = new MenuUser(controller, equipo);
 	                anterior.show();
 	                window.setVisible(false);
 	            }
@@ -148,9 +149,11 @@ public class ConfigurarAlineacion {
 	    protected JButton button;
 	    private String label;
 	    private boolean isPushed;
+		private equipo equipo;
 
-	    public ButtonEditor2(JCheckBox checkBox) {
+	    public ButtonEditor2(JCheckBox checkBox, equipo equipo) {
 	        super(checkBox);
+			this.equipo = equipo;
 	        button = new JButton();
 	        button.setOpaque(true);
 	        button.addActionListener(new ActionListener() {
@@ -182,20 +185,16 @@ public class ConfigurarAlineacion {
 	    	controller controller = controlador;
 	        if (isPushed) {
 	        	try {
-	        		
-	        		
-	        		String userName = controller.getUserName();
-			        ArrayList<jugador> ListTitulares = controller.consultarTitulares(userName);
+			        ArrayList<jugador> ListTitulares = controller.consultarTitulares(equipo);
 			        if(ListTitulares.size()==11)
 			        {
-			        	String titularElegido = label;
-			        	AuxConfigurarAlin aux = new AuxConfigurarAlin(controller, label, window);
+			        	AuxConfigurarAlin aux = new AuxConfigurarAlin(controller, label, window, equipo);
 			        	aux.show();
 			        	window.setVisible(false);
 			        }
 			        else 
 			        {
-			        	controller.elegirTitular(label);
+			        	controller.elegirTitular(label, equipo);
 			        }
 	        		
 				} catch (IOException e) {

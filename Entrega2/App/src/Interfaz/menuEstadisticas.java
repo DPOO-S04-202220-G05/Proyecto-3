@@ -15,13 +15,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Analizador.equipo;
 import Controller.controller;
 
 public class menuEstadisticas {
     
     private JFrame window;
 
-    public menuEstadisticas(controller controller) {
+    public menuEstadisticas(controller controller, equipo equipo) {
         window = new JFrame();
         window.setTitle("USER TYPE");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -58,7 +59,7 @@ public class menuEstadisticas {
             public void actionPerformed(ActionEvent e) {
                 PositionsTable positionsTable;
                 try {
-                    positionsTable = new PositionsTable(controller);
+                    positionsTable = new PositionsTable(controller, equipo);
                     positionsTable.show();
                 } catch (IOException e1) {
                     // TODO Auto-generated catch block
@@ -78,7 +79,7 @@ public class menuEstadisticas {
             public void actionPerformed(ActionEvent e) {
                 bestTeam ventanaMejoresEquipos = null;
 				try {
-					ventanaMejoresEquipos = new bestTeam(controller);
+					ventanaMejoresEquipos = new bestTeam(controller, equipo);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -105,7 +106,7 @@ public class menuEstadisticas {
             	{
             		PopUps popUp = new PopUps();
             		ArrayList<String> JugadorMenosyMas = new  ArrayList<String>();
-            		JugadorMenosyMas = controller.jugadorconMasyMenosPuntos();
+            		JugadorMenosyMas = controller.jugadorconMasyMenosPuntos(equipo);
             		
             		popUp.mejorYpeorJugador(JugadorMenosyMas.get(0), JugadorMenosyMas.get(1), JugadorMenosyMas.get(2), JugadorMenosyMas.get(3));
             		
@@ -130,7 +131,7 @@ public class menuEstadisticas {
             @Override
             public void actionPerformed(ActionEvent e) {
             	MenuUser anterior;
-                anterior = new MenuUser(controller);
+                anterior = new MenuUser(controller, equipo);
                 anterior.show();
                 window.setVisible(false);
             }

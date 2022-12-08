@@ -21,7 +21,7 @@ public class NewTeam {
 
     private JFrame window;
 
-    public NewTeam(controller controller){
+    public NewTeam(controller controller, String userName){
         window = new JFrame();
         window.setTitle("ADMIN LOGIN");
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -67,7 +67,7 @@ public class NewTeam {
 				}
             	PopUps popUp = new PopUps();
             	popUp.showCreacionEqExitoso();
-				MenuUser menu = new MenuUser(controller);
+				TeamMenu menu = new TeamMenu(controller, userName);
 				menu.show();
 				window.setVisible(false);
                
@@ -80,8 +80,8 @@ public class NewTeam {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-            	MenuUser anterior;
-                anterior = new MenuUser(controller);
+            	TeamMenu anterior;
+                anterior = new TeamMenu(controller, userName);
                 anterior.show();
                 window.setVisible(false);
             }

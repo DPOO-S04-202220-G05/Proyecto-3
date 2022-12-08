@@ -60,7 +60,7 @@ public class TeamStatistics {
             public void actionPerformed(ActionEvent e) {
             	PositionsTable anterior;
                 try {
-                    anterior = new PositionsTable(controller);
+                    anterior = new PositionsTable(controller, equipo);
                     anterior.show();
                 } catch (IOException e1) {
                     // TODO Auto-generated catch block
