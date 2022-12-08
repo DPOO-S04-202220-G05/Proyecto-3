@@ -21,7 +21,7 @@ import Controller.controller;
 
 public class ReportesPrincipal {
 	private JFrame window;
-	public ReportesPrincipal(controller controller)
+	public ReportesPrincipal(controller controller, JFrame anterior)
 	{
 		window = new JFrame();
 		window.setTitle("Reportes");
@@ -65,7 +65,7 @@ public class ReportesPrincipal {
 		
                 
                 
-                window.setVisible(false);
+           
             }
             
         });
@@ -85,7 +85,20 @@ public class ReportesPrincipal {
             
         });
         
-        
+        JButton volver = new JButton("Comparacion por precio");
+        layout.fill = GridBagConstraints.HORIZONTAL;
+        layout.gridx = 0;
+        layout.gridy = 3;
+        panel.add(volver, layout);
+        volver.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                anterior.setVisible(true);
+                window.setVisible(false);
+            }
+            
+        });
         window.add(panel);
 	}
 	

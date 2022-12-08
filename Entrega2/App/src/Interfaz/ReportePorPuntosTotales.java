@@ -26,12 +26,10 @@ public class ReportePorPuntosTotales {
 		window.setTitle("Reporte por puntos totales");
 		
         window.setSize(350, 400);
-        window.setLocationRelativeTo(null);
+       
 	    
         JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(new GridBagLayout());
+        
         
         
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
@@ -49,6 +47,7 @@ public class ReportePorPuntosTotales {
 				"Puntos Totales", 
 				datos);
         ChartPanel Reporte = new ChartPanel(Grafico);
+        Reporte.setSize(200,200);
         panel.add(Reporte);
         window.add(panel);
 	}

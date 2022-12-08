@@ -77,7 +77,7 @@ public class MenuAdmin {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               ReportesPrincipal reportesVentana = new ReportesPrincipal(controller);
+               ReportesPrincipal reportesVentana = new ReportesPrincipal(controller, window);
                reportesVentana.show();
                 window.setVisible(false);
             }
