@@ -62,6 +62,21 @@ public class desempenio {
 	 * Un int que representa la cantidad de tarjetas rojas que recibio el jugador
 	 */
 	private int tarjetasRojas;
+	
+	/*
+	 * Un int que representa la cantidad de penaltis que erro el jugador
+	 */
+	private int manos;
+
+	/*
+	 * Un int que representa la cantidad de tarjetas amarillas que recibio el jugador
+	 */
+	private int tirosLibres;
+
+	/*
+	 * Un int que representa la cantidad de tarjetas rojas que recibio el jugador
+	 */
+	private int golTirosLibres;
 	/* ==================================================================================
 	 * * 							MÉTODOS
 	   ==================================================================================
@@ -77,7 +92,7 @@ public class desempenio {
 	 * @param aun no se sabe
 	 */
 
-	public desempenio(int cantidadMinutos, int goles, int penaltis, int autogoles, int asistencias, int golesRecibidos, int penaltisRecibidos, int penaltisAtajados, int penaltisErrados, int tarjetasAmarillas, int tarjetasRojas){
+	public desempenio(int cantidadMinutos, int goles, int penaltis, int autogoles, int asistencias, int golesRecibidos, int penaltisRecibidos, int penaltisAtajados, int penaltisErrados, int tarjetasAmarillas, int tarjetasRojas, int manos, int tirosLibres,int golTirosLibres){
 		this.cantidaMinutos = cantidadMinutos;
 		this.goles = goles;
 		this.penaltis = penaltis;
@@ -90,6 +105,9 @@ public class desempenio {
 		this.penaltisErrados = penaltisErrados;
 		this.tarjetasAmarillas = tarjetasAmarillas;
 		this.tarjetasRojas = tarjetasRojas;
+		this.manos = manos;
+		this.tirosLibres = tirosLibres;
+		this.golTirosLibres = golTirosLibres;
 
 	}
 	
@@ -131,6 +149,10 @@ public class desempenio {
 			puntos-=3*this.tarjetasRojas;
 			puntos-=2*this.autogoles;
 			puntos+=3*this.asistencias;
+			puntos-=1*this.manos;
+			puntos+=1*this.tirosLibres;
+			puntos+=2*this.golTirosLibres;
+			
 			}
 		return puntos;
 	}

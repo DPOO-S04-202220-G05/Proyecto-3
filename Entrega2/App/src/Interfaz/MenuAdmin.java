@@ -66,6 +66,24 @@ public class MenuAdmin {
             
         });
         
+        JButton NewReportButton = new JButton("Generar Reportes");
+        
+        layout.fill = GridBagConstraints.HORIZONTAL;
+        layout.gridx = 0;
+        layout.gridy = 2;
+        
+        panel.add(NewReportButton, layout);
+        NewReportButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               ReportesPrincipal reportesVentana = new ReportesPrincipal(controller, window);
+               reportesVentana.show();
+                window.setVisible(false);
+            }
+            
+        });
+        
         JButton returnButton = new JButton("Cerrar Sesion");
         returnButton.addActionListener(new ActionListener(){
 
@@ -81,11 +99,11 @@ public class MenuAdmin {
         
         layout.fill = GridBagConstraints.HORIZONTAL;
         layout.gridx = 0;
-        layout.gridy = 2;
+        layout.gridy = 3;
         layout.insets = new Insets(0, 0, 50, 0);
 
         panel.add(returnButton, layout);
-
+       
         window.add(panel);
     }
 

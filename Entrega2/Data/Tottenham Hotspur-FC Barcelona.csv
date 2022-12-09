@@ -1,24 +1,24 @@
-"equipo";"jugador","1-cantidadMinutos","2-goles","3-penaltis","4-autogoles","5-asistencias","6-golesRecibidos","7-penaltisRecibidos","8-penaltisAtajados","9-penaltisErrados","10-tarjetasAmarillas","11-tarjetasRojas"
-Tottenham Hotspur,FC Barcelona,01/01/2022,17:30,1
-Tottenham Hotspur;A. Meyer,90,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;A. Christensen,90,0,0,0,0,2,0,0,0,1,0
-Tottenham Hotspur;R. Bazoer,90,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;Ivanildo Fernandes,90,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;G. Ferrari,90,0,0,1,0,2,0,0,0,0,0
-Tottenham Hotspur;L. Krasniqi,90,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;A. Damdam,90,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;M. Kranevitter,45,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;J. Lukaku,90,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;A. Kojic,60,0,0,0,0,2,0,0,0,0,0
-Tottenham Hotspur;R. Germain,75,0,0,0,0,2,0,0,0,0,0
-FC Barcelona;M. Ter Stegen,90,0,0,0,0,0,0,0,0,0,0
-FC Barcelona;R. Araujo,90,0,0,0,0,0,0,0,0,0,0
-FC Barcelona;G. Pique,90,0,0,0,0,0,0,0,0,1,0
-FC Barcelona;J. Kounde,90,0,0,0,0,0,0,0,0,1,0
-FC Barcelona;J. Alba,90,0,0,0,0,0,0,0,0,1,0
-FC Barcelona;Pedri,90,0,0,0,0,0,0,0,0,0,0
-FC Barcelona;Gavi,90,0,0,0,0,0,0,0,0,0,0
-FC Barcelona;F. de Jong,90,0,0,0,1,0,0,0,0,0,0
-FC Barcelona;S. Busquets,90,0,0,0,0,0,0,0,0,0,0
-FC Barcelona;R. Lewandowski,90,0,0,0,0,0,0,0,0,0,0
-FC Barcelona;L. Messi,90,1,0,0,0,0,0,0,0,0,0
+equipo;"jugador,""1-cantidadMinutos"",""2-goles"",""3-penaltis"",""4-autogoles"",""5-asistencias"",""6-golesRecibidos"",""7-penaltisRecibidos"",""8-penaltisAtajados"",""9-penaltisErrados"",""10-tarjetasAmarillas"",""11-tarjetasRojas"",""12-manos"",""13-tirosLibres"",""14-golTiroLibre"""
+Tottenham Hotspur,FC Barcelona,01/01/2022,17:30,1;
+Tottenham Hotspur;A. Meyer,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;A. Christensen,90,0,0,0,0,2,0,0,0,1,0,0,0,0
+Tottenham Hotspur;R. Bazoer,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;Ivanildo Fernandes,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;G. Ferrari,90,0,0,1,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;L. Krasniqi,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;A. Damdam,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;M. Kranevitter,45,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;J. Lukaku,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;A. Kojic,60,0,0,0,0,2,0,0,0,0,0,0,0,0
+Tottenham Hotspur;R. Germain,75,0,0,0,0,2,0,0,0,0,0,0,0,0
+FC Barcelona;M. Ter Stegen,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+FC Barcelona;R. Araujo,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+FC Barcelona;G. Pique,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+FC Barcelona;J. Kounde,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+FC Barcelona;J. Alba,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+FC Barcelona;Pedri,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+FC Barcelona;Gavi,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+FC Barcelona;F. de Jong,90,0,0,0,1,0,0,0,0,0,0,0,0,0
+FC Barcelona;S. Busquets,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+FC Barcelona;R. Lewandowski,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+FC Barcelona;L. Messi,90,1,0,0,0,0,0,0,0,0,0,0,0,0
