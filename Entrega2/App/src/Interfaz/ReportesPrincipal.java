@@ -61,11 +61,7 @@ public class ReportesPrincipal {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
-		
-                
-                
-           
+				     
             }
             
         });
@@ -79,13 +75,19 @@ public class ReportesPrincipal {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                try {
+					ReportePorPrecio reportePrecio = new ReportePorPrecio(controller);
+					reportePrecio.show();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 window.setVisible(false);
             }
             
         });
         
-        JButton volver = new JButton("Comparacion por precio");
+        JButton volver = new JButton("Volver");
         layout.fill = GridBagConstraints.HORIZONTAL;
         layout.gridx = 0;
         layout.gridy = 3;

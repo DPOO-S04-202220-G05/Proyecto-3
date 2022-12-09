@@ -1,11 +1,7 @@
 package Interfaz;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,12 +16,12 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import Analizador.equipo;
 import Controller.controller;
 
-public class ReportePorPuntosTotales {
+public class ReportePorPrecio {
 	private JFrame window;
-	public ReportePorPuntosTotales(controller controller) throws IOException
+	public ReportePorPrecio(controller controller) throws IOException
 	{
 		window = new JFrame();
-		window.setTitle("Reporte por puntos totales");
+		window.setTitle("Reporte por precio");
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setSize(400, 400);
        
@@ -35,13 +31,13 @@ public class ReportePorPuntosTotales {
         for(int i=0; i<equiposfantasia.size();i++)
         {
         	equipo equipofantasia = equiposfantasia.get(i);
-        	datos.setValue(equipofantasia.getPuntos(), "Puntos", equipofantasia.getNombre());
-        	
+        	datos.setValue((100000000-equipofantasia.getPresupuesto()), "Precio", equipofantasia.getNombre());
+        	//100000000
         }
         JFreeChart Grafico = ChartFactory.createBarChart(
-				"Progreso comparativo de equipos - Por puntos totales", 
+				"Progreso comparativo de equipos - Por precio del equipo", 
 				"Equipos", 
-				"Puntos Totales", 
+				"Valor", 
 				datos);
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
