@@ -32,7 +32,8 @@ public class datos {
 	public void cargar_datos_temporada(File archivoJugadoresyEquipos, File archivoTemporada) throws IOException{
         Scanner lector = new Scanner(archivoJugadoresyEquipos);
 
-		persistencia.crearTemporada();
+        ArrayList<File> archivosTemporadas = persistencia.crearTemporada();
+        int numeroTemporadaActual = archivosTemporadas.size();
         
         while (lector.hasNextLine()){
             String info = lector.nextLine();
@@ -59,6 +60,50 @@ public class datos {
 	        	persistencia.cargarDatosEquipo(equipoReal);
 			}   
         }
+		
+		if (archivosTemporadas.size()>0) 
+		{
+			File podio = new File("Temporadas/Temporada"+(numeroTemporadaActual+1)+"/podio.txt");
+			podio.createNewFile();
+			ArrayList<File> ArchivosReales = persistencia.consultarEquiposReales2();
+			datos logica = new datos();
+			ArrayList<equipo> EquiposReales = new ArrayList<equipo>();
+			for(File f: ArchivosReales)
+				{
+					equipo equipoR = logica.convertirArchivoEquipo2(f);
+					ArrayList<jugador> jugadores = (equipoR.getJugadores());
+		    		int puntostotales = 0;
+		    		for(jugador j: jugadores)
+		    			{
+		    				puntostotales += j.getPuntos();
+		    			}
+		    		equipoR.setPuntos(puntostotales);
+		    		logica.cargarEquipo2(equipoR);
+		    		EquiposReales.add(equipoR);
+				}
+			TreeMap<Integer,String> puntos = new TreeMap<Integer,String>();
+			for(equipo eq: EquiposReales)
+				{
+					puntos.put(eq.getPuntos(),eq.getNombre());
+				}
+			int centinela = 0;
+			int mayor;
+			String[] top = new String[3];
+			while (centinela!=3)
+			{
+				mayor = puntos.lastKey();
+				top[centinela] = puntos.get(mayor);
+				puntos.remove(mayor);
+				centinela+=1;
+			}
+    		FileWriter lstWriter = new FileWriter("Temporadas/Temporada"+(numeroTemporadaActual+1)+"/podio.txt",true);
+			for(String p: top)
+			{
+	    		lstWriter.append("\n"+p);
+			}
+    		lstWriter.flush();
+    		lstWriter.close();
+		}
 
         try (Scanner line = new Scanner(archivoTemporada)) {
 			String info = line.nextLine();
@@ -97,6 +142,11 @@ public class datos {
     	persistencia.cargarDatosEquipo(e);
 	}
 
+	public void cargarEquipo2(equipo e) throws IOException 
+	{
+    	persistencia.cargarDatosEquipo2(e);
+	}
+	
 	public void cargarJugador(jugador j) throws IOException 
 	{
     	persistencia.cargarDatosJugador(j);
@@ -251,6 +301,61 @@ public class datos {
 	}
 
 
+	public equipo convertirArchivoEquipo2(File archivoEquipo) throws IOException 
+	{
+		BufferedReader bufferLectura = new BufferedReader(new FileReader(archivoEquipo));
+		String linea = bufferLectura.readLine();
+		linea = bufferLectura.readLine();
+		String[] datosEquipo = linea.split(",");
+		String nombreUsuario = datosEquipo[0];
+		String nombreEquipo = datosEquipo[1];
+		List<String> nombresjugadores = Arrays.asList(datosEquipo[2].split("-"));
+		ArrayList<jugador> Jugadores = new ArrayList<>();
+		for (String nombrej: nombresjugadores)
+		{
+			if (!nombrej.equals(""))
+			{
+				jugador j = consultarJugador2(nombrej);
+				if (!j.getNombre().equals(""))
+				{
+					Jugadores.add(j);
+				}
+			}
+		}
+		List<String> nombresTitulares = Arrays.asList(datosEquipo[3].split("-"));
+		ArrayList<jugador> Titulares = new ArrayList<>();
+		for (String nombret: nombresTitulares)
+		{
+			if (!nombret.equals(""))
+			{
+				jugador j = consultarJugador2(nombret);
+				if (!j.getNombre().equals(""))
+				{
+					Titulares.add(consultarJugador2(nombret));
+				}
+			}
+		}
+		float presupuestoE = Float.parseFloat(datosEquipo[4]);
+		int puntosE = Integer.parseInt(datosEquipo[5]);
+		boolean realE = Boolean.parseBoolean(datosEquipo[6]);
+		bufferLectura.close();
+		
+		equipo EquipoUsu = new equipo(nombreEquipo,nombreUsuario, realE, presupuestoE);
+		EquipoUsu.setPuntos(puntosE);
+		EquipoUsu.setJugadores(Jugadores);
+		EquipoUsu.setTitulares(Titulares);
+		if (!realE && datosEquipo.length>7)
+		{
+			jugador capitan = consultarJugador(datosEquipo[7]);
+			if (capitan!=null)
+			{
+				EquipoUsu.setCapitan(capitan);
+			}
+		}
+		return EquipoUsu ;
+	}
+	
+
 	public ArrayList<equipo> obtenerEquiposFantasia() throws IOException{
 		return persistencia.ObtenerEquiposFantasia();
 	}
@@ -259,6 +364,20 @@ public class datos {
 	public jugador consultarJugador(String nombreJugador) throws IOException 
 	{
 		File ArchivoJugador = persistencia.consultarDatosJugador(nombreJugador);
+		jugador jugador;
+		if (ArchivoJugador.getName().equals(""))
+		{
+			jugador= new jugador("","",0f,0,"");
+			return jugador;
+		}
+		jugador = convertirArchivoJugador(ArchivoJugador);
+		return jugador ;
+	}
+	
+	
+	public jugador consultarJugador2(String nombreJugador) throws IOException 
+	{
+		File ArchivoJugador = persistencia.consultarDatosJugador2(nombreJugador);
 		jugador jugador;
 		if (ArchivoJugador.getName().equals(""))
 		{

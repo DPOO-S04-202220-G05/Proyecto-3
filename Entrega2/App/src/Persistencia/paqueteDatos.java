@@ -22,6 +22,7 @@ public class paqueteDatos {
 	private File CarpetaPartidos ;
 	private File CarpetaTemporadas = new File("Temporadas");
 	private File CarpetaFechas;
+	private int temporadaActual;
 	
 	
 	
@@ -206,6 +207,59 @@ public class paqueteDatos {
 		
 	}
 
+	public void cargarDatosEquipo2(equipo datos) throws IOException
+	{
+		setPaths();
+		File Carpeta2 = new File("Temporadas/Temporada"+(this.temporadaActual-1)+"/Equipos");
+		String nombre = datos.getNombre();
+		String nombreD = datos.getDueño();
+		ArrayList<jugador> listajugadores = datos.getJugadores();
+		String nombresjugadores = "";
+		for (jugador j: listajugadores)
+		{
+			nombresjugadores += j.getNombre()+"-";
+		}
+		ArrayList<jugador> listatitulares = datos.getTitulares();
+		String nombrestitulares = "";
+		for (jugador j: listatitulares)
+		{
+			nombrestitulares += j.getNombre()+"-";
+		}
+		float presupuesto = datos.getPresupuesto();
+		int puntos = datos.getPuntos();
+		boolean real = datos.getReal();
+		String nombrecarpeta = Carpeta2.getPath();
+		if (!existeCarpeta(nombrecarpeta))
+		{
+			Carpeta2.mkdir();
+		}
+		//Se crea, en la carpeta Usuarios, un csv con el siguiente nombre: "nombreUsuario-contraseniaUsuario.csv"
+		//Este contiene la info del usuario
+		
+		FileWriter csvWriter = new FileWriter(nombrecarpeta + "/" + nombreD + "-" + nombre +  ".csv");
+		if (!real) 
+		{
+			String nomcapitan = "";
+			jugador capitan = datos.getCapitan();
+			if (capitan!=null)
+			{
+				nomcapitan = capitan.getNombre();
+			}
+			csvWriter.append("nombre.duenio,nombre.equipo,jugadores,titulares,presupuesto,puntos,real,capitan");
+			csvWriter.append("\n");
+			csvWriter.append(nombreD + "," + nombre  + "," + nombresjugadores + "," + nombrestitulares + "," + presupuesto + "," + puntos + "," + real + "," + nomcapitan);
+		}
+		else
+		{
+			csvWriter.append("nombre.duenio,nombre.equipo,jugadores,titulares,presupuesto,puntos,real");
+			csvWriter.append("\n");
+			csvWriter.append(nombreD + "," + nombre  + "," + nombresjugadores + "," + nombrestitulares + "," + presupuesto + "," + puntos + "," + real);
+		}
+		csvWriter.flush();
+		csvWriter.close();
+		
+	}
+	
 	public ArrayList<File> consultarDatosEquipos(String Nombre) throws IOException 
 	{
 		setPaths();
@@ -284,6 +338,34 @@ public class paqueteDatos {
 		return archivosreales;
 	}
 	
+
+	public ArrayList<File> consultarEquiposReales2() throws IOException 
+	{
+		setPaths();
+		ArrayList<File> archivosreales = new ArrayList<>();
+		if (CarpetaEquipos.listFiles()!=null)
+		{
+			for (File file : CarpetaEquipos.listFiles()) 
+			{
+				String NombreArchivo = file.getName();
+				BufferedReader bufferLectura = new BufferedReader(new FileReader("Temporadas/Temporada"+((this.temporadaActual)-1)+"/Equipos" +"/" + NombreArchivo));
+				String linea = bufferLectura.readLine();
+				linea = bufferLectura.readLine();
+				String[] equipo = linea.split(",");
+				if(equipo[0].length()<4)
+				{}
+				else if((equipo[0].substring(0,4)).equals("real")) 
+				{
+					bufferLectura.close();
+					archivosreales.add(file);
+				}
+				bufferLectura.close();
+			}
+		}
+		return archivosreales;
+	}
+	
+	
 	public void cargarDatosJugador(jugador datos) throws IOException
 	{
 		String nombre = datos.getNombre();
@@ -344,7 +426,31 @@ public class paqueteDatos {
 		File file = new File("");
 		return file;
 	}
-	
+
+	public File consultarDatosJugador2(String Nombre) throws IOException 
+	{
+		setPaths();
+		File carpeta2 = new File("Temporadas/Temporada"+(this.temporadaActual-1)+"/Jugadores");
+		if (carpeta2.listFiles()!=null)
+		{
+		for (File file : carpeta2.listFiles()) 
+		{
+			String NombreArchivo = file.getName();
+			BufferedReader bufferLectura = new BufferedReader(new FileReader("Temporadas/Temporada"+(this.temporadaActual-1)+"/Jugadores"  +"/" + NombreArchivo));
+			String linea = bufferLectura.readLine();
+			linea = bufferLectura.readLine();
+			String[] jugador = linea.split(",");
+			if(jugador[0].equals(Nombre)) 
+			{
+				bufferLectura.close();
+				return file;
+			}
+			bufferLectura.close();
+		}
+		}
+		File file = new File("");
+		return file;
+	}
 	/**
 	 * Se revisa si la carpeta usuario existe, en tal caso, se guardan los usuarios 
 	 * que esten dentro de la carpeta
@@ -464,7 +570,7 @@ public class paqueteDatos {
 		
 	}
 
-	public void crearTemporada() throws IOException
+	public ArrayList<File> crearTemporada() throws IOException
 	{
 		if(!existeCarpeta("Temporadas"))
 			{
@@ -484,16 +590,12 @@ public class paqueteDatos {
 		int numeroTemporadaActual = archivosTemporadas.size()+1;
 		File carpetaTemporadaActual = new File("Temporadas/Temporada"+numeroTemporadaActual);
 		carpetaTemporadaActual.mkdir();
-		if (archivosTemporadas.size()>0) 
-		{
-			File podio = new File("Temporadas/Temporada"+numeroTemporadaActual+"/podio.txt");
-			podio.createNewFile();
-		}
 		this.CarpetaUsuarios = new File("Usuarios");
 		this.CarpetaEquipos = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Equipos");
 		this.CarpetaJugadores = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Jugadores");
 		this.CarpetaPartidos = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Partidos");
 		this.CarpetaFechas = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Fechas");
+		return archivosTemporadas;
 	}
 	
 	public void setPaths()
@@ -514,6 +616,7 @@ public class paqueteDatos {
 			}
 		}
 		int numeroTemporadaActual = archivosTemporadas.size();
+		this.temporadaActual = numeroTemporadaActual;
 		this.CarpetaUsuarios = new File("Usuarios");
 		this.CarpetaEquipos = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Equipos");
 		this.CarpetaJugadores = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Jugadores");
@@ -588,10 +691,10 @@ public class paqueteDatos {
 		    {
 	    		abiertas.createNewFile();
 	    		FileWriter txtWriter = new FileWriter("abiertas.txt");
-	    		txtWriter.append("fecha"+1);
+	    		txtWriter.append("Fecha"+1);
 	    		txtWriter.flush();
 	    		txtWriter.close();
-	    		if ("fecha1".equals("fecha"+fecha))
+	    		if ("Fecha1".equals("Fecha"+fecha))
 				{
 					HashMap<String, desempenio> equipoLocal = partido.getdesemepenioEquipoLocal();
 					HashMap<String, desempenio> equipoVisitante = partido.getdesemepenioEquipoVisitante();
@@ -697,7 +800,7 @@ public class paqueteDatos {
 			{
 				ultima = linea;
 			}
-			if (ultima.equals("fecha"+fecha))
+			if (ultima.equals("Fecha"+fecha))
 			{
 				HashMap<String, desempenio> equipoLocal = partido.getdesemepenioEquipoLocal();
 				HashMap<String, desempenio> equipoVisitante = partido.getdesemepenioEquipoVisitante();
@@ -816,10 +919,10 @@ public class paqueteDatos {
 				csvWriter.close();
 				
 			}
-		    else if (ultima.equals("fecha"+(fecha-1)))
+		    else if (ultima.equals("Fecha"+(fecha-1)))
 		    {
 	    		FileWriter txtWriter = new FileWriter("abiertas.txt");
-	    		txtWriter.append("fecha"+fecha);
+	    		txtWriter.append("Fecha"+fecha);
 	    		txtWriter.flush();
 	    		txtWriter.close();
 	    		
@@ -828,7 +931,12 @@ public class paqueteDatos {
 	    	    		cerradas.createNewFile();
 	    		    }
 	    		FileWriter lstWriter = new FileWriter("cerradas.txt",true);
-	    		lstWriter.append(ultima);
+				if (ultima == "Fecha1"){
+					lstWriter.append(ultima);
+				}
+				else{
+					lstWriter.append(";"+ultima);
+				}
 	    		lstWriter.flush();
 	    		lstWriter.close();
 
@@ -1017,7 +1125,7 @@ public class paqueteDatos {
 		bufferLecturaabiertas.close();
 		if (fecha.equals(""))
 		{
-			fecha = "fecha"+0;
+			fecha = "Fecha"+0;
 		}
 		return fecha;
 	}
@@ -1030,12 +1138,16 @@ public class paqueteDatos {
 		String fecha ="";
 		while((linea = bufferLectura.readLine()) != null)
 		{
-			fechas.add(linea);
+			String[] index_fechas = linea.split(";");
+			
+			for (int i = 0; i < index_fechas.length; i++){
+				fechas.add(index_fechas[i]);
+			}
 		}
 		bufferLectura.close();
 		if (fecha.equals(""))
 		{
-			fecha = "fecha"+0;
+			fecha = "Fecha"+0;
 		}
 		return fechas;
 	}
