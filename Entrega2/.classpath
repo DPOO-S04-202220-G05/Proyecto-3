@@ -7,7 +7,5 @@
 	</classpathentry>
 	<classpathentry excluding="Consola/" kind="src" path="App/src"/>
 	<classpathentry kind="src" path="App/src/Consola"/>
-	<classpathentry kind="lib" path="D:/David/Trabajos/Entregas/DPO/Proyecto-3/Entrega2/lib/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="D:/David/Trabajos/Entregas/DPO/Proyecto-3/Entrega2/lib/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="output" path="App/bin"/>
 </classpath>
