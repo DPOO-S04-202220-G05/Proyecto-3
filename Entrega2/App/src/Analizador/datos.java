@@ -63,7 +63,7 @@ public class datos {
 		
 		if (archivosTemporadas.size()>0) 
 		{
-			File podio = new File("Temporadas/Temporada"+(numeroTemporadaActual-1)+"/podio.txt");
+			File podio = new File("Temporadas/Temporada"+(numeroTemporadaActual+1)+"/podio.txt");
 			podio.createNewFile();
 			ArrayList<File> ArchivosReales = persistencia.consultarEquiposReales2();
 			datos logica = new datos();
@@ -81,6 +81,28 @@ public class datos {
 		    		logica.cargarEquipo2(equipoR);
 		    		EquiposReales.add(equipoR);
 				}
+			TreeMap<Integer,String> puntos = new TreeMap<Integer,String>();
+			for(equipo eq: EquiposReales)
+				{
+					puntos.put(eq.getPuntos(),eq.getNombre());
+				}
+			int centinela = 0;
+			int mayor;
+			String[] top = new String[3];
+			while (centinela!=3)
+			{
+				mayor = puntos.lastKey();
+				top[centinela] = puntos.get(mayor);
+				puntos.remove(mayor);
+				centinela+=1;
+			}
+    		FileWriter lstWriter = new FileWriter("Temporadas/Temporada"+(numeroTemporadaActual+1)+"/podio.txt",true);
+			for(String p: top)
+			{
+	    		lstWriter.append("\n"+p);
+			}
+    		lstWriter.flush();
+    		lstWriter.close();
 		}
 
         try (Scanner line = new Scanner(archivoTemporada)) {
