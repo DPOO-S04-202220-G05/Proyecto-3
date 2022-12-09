@@ -691,10 +691,10 @@ public class paqueteDatos {
 		    {
 	    		abiertas.createNewFile();
 	    		FileWriter txtWriter = new FileWriter("abiertas.txt");
-	    		txtWriter.append("fecha"+1);
+	    		txtWriter.append("Fecha"+1);
 	    		txtWriter.flush();
 	    		txtWriter.close();
-	    		if ("fecha1".equals("fecha"+fecha))
+	    		if ("Fecha1".equals("Fecha"+fecha))
 				{
 					HashMap<String, desempenio> equipoLocal = partido.getdesemepenioEquipoLocal();
 					HashMap<String, desempenio> equipoVisitante = partido.getdesemepenioEquipoVisitante();
@@ -800,7 +800,7 @@ public class paqueteDatos {
 			{
 				ultima = linea;
 			}
-			if (ultima.equals("fecha"+fecha))
+			if (ultima.equals("Fecha"+fecha))
 			{
 				HashMap<String, desempenio> equipoLocal = partido.getdesemepenioEquipoLocal();
 				HashMap<String, desempenio> equipoVisitante = partido.getdesemepenioEquipoVisitante();
@@ -919,10 +919,10 @@ public class paqueteDatos {
 				csvWriter.close();
 				
 			}
-		    else if (ultima.equals("fecha"+(fecha-1)))
+		    else if (ultima.equals("Fecha"+(fecha-1)))
 		    {
 	    		FileWriter txtWriter = new FileWriter("abiertas.txt");
-	    		txtWriter.append("fecha"+fecha);
+	    		txtWriter.append("Fecha"+fecha);
 	    		txtWriter.flush();
 	    		txtWriter.close();
 	    		
@@ -931,7 +931,12 @@ public class paqueteDatos {
 	    	    		cerradas.createNewFile();
 	    		    }
 	    		FileWriter lstWriter = new FileWriter("cerradas.txt",true);
-	    		lstWriter.append("\n"+ultima);
+				if (ultima == "Fecha1"){
+					lstWriter.append(ultima);
+				}
+				else{
+					lstWriter.append(";"+ultima);
+				}
 	    		lstWriter.flush();
 	    		lstWriter.close();
 
@@ -1120,7 +1125,7 @@ public class paqueteDatos {
 		bufferLecturaabiertas.close();
 		if (fecha.equals(""))
 		{
-			fecha = "fecha"+0;
+			fecha = "Fecha"+0;
 		}
 		return fecha;
 	}
@@ -1133,12 +1138,16 @@ public class paqueteDatos {
 		String fecha ="";
 		while((linea = bufferLectura.readLine()) != null)
 		{
-			fechas.add(linea);
+			String[] index_fechas = linea.split(";");
+			
+			for (int i = 0; i < index_fechas.length; i++){
+				fechas.add(index_fechas[i]);
+			}
 		}
 		bufferLectura.close();
 		if (fecha.equals(""))
 		{
-			fecha = "fecha"+0;
+			fecha = "Fecha"+0;
 		}
 		return fechas;
 	}
