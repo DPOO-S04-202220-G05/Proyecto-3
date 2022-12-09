@@ -166,6 +166,14 @@ class ButtonEditor3 extends DefaultCellEditor {
         if (isPushed) {
 				equipo equipo = equipos.get(Integer.parseInt(label)-1);
                 MenuUser menu = new MenuUser(controller, equipo);
+                try {
+                    int puntos = controller.actualizarPuntos(equipo);
+				    PopUps popup = new PopUps();
+				    popup.puntosUsuario(puntos);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 menu.show();
                 window.setVisible(false);
         }
