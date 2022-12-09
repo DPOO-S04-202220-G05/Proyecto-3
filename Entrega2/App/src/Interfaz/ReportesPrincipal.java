@@ -141,6 +141,13 @@ public class ReportesPrincipal {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+					ReportePorVentas graficaVentas = new ReportePorVentas(controller);
+					graficaVentas.show();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 
                 
             }
