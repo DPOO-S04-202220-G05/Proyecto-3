@@ -60,23 +60,27 @@ public class datos {
 			}   
         }
 
-        Scanner line = new Scanner(archivoTemporada);
-		String info = line.nextLine();
-		while (line.hasNextLine()){
-			info = line.nextLine();
-			
-            String[] partes = info.split(",");
-            
-            String nombreEquipoLocal = partes[0];
-            String nombreEquipoVisitante = partes[1];
-            String fechaDias = partes[2];
-			String hora = partes[3];
-			int fecha = Integer.parseInt(partes[4]);
+        try (Scanner line = new Scanner(archivoTemporada)) {
+			String info = line.nextLine();
+			while (line.hasNextLine()){
+				info = line.nextLine();
+				
+			    String[] partes = info.split(",");
+			    
+			    String nombreEquipoLocal = partes[0];
+			    String nombreEquipoVisitante = partes[1];
+			    String fechaDias = partes[2];
+				String hora = partes[3];
+				int fecha = Integer.parseInt(partes[4]);
 
-			persistencia.crearFecha(fecha);
-			persistencia.crearPartido(nombreEquipoLocal, nombreEquipoVisitante, fechaDias, hora, fecha);
+				persistencia.crearFecha(fecha);
+				persistencia.crearPartido(nombreEquipoLocal, nombreEquipoVisitante, fechaDias, hora, fecha);
 
 
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
     }

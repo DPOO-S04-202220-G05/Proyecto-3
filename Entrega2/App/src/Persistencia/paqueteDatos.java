@@ -464,7 +464,7 @@ public class paqueteDatos {
 		
 	}
 
-	public void crearTemporada()
+	public void crearTemporada() throws IOException
 	{
 		if(!existeCarpeta("Temporadas"))
 			{
@@ -484,6 +484,11 @@ public class paqueteDatos {
 		int numeroTemporadaActual = archivosTemporadas.size()+1;
 		File carpetaTemporadaActual = new File("Temporadas/Temporada"+numeroTemporadaActual);
 		carpetaTemporadaActual.mkdir();
+		if (archivosTemporadas.size()>0) 
+		{
+			File podio = new File("Temporadas/Temporada"+numeroTemporadaActual+"/podio.txt");
+			podio.createNewFile();
+		}
 		this.CarpetaUsuarios = new File("Usuarios");
 		this.CarpetaEquipos = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Equipos");
 		this.CarpetaJugadores = new File("Temporadas/Temporada"+numeroTemporadaActual+"/Jugadores");
@@ -1081,6 +1086,55 @@ public class paqueteDatos {
 		archivoMaxEquipo.createNewFile();
 		}
 	}
+	
+	public void calcularMejorEquipoTemporada(int fecha) throws IOException
+	{
+		datos datos = new datos();
+		ArrayList<File> equiposFantasia = consultarEquiposFantasia();
+		datos convertidorArchivos = new datos();
+		ArrayList<equipo> equipos = new ArrayList<>();
+
+		for(File f: equiposFantasia) 
+		{
+			equipo equipoFantasia = convertidorArchivos.convertirArchivoEquipo(f);
+	    	if (!equipoFantasia.getNombre().equals(""))
+	    		{
+		    		ArrayList<jugador> Titulares = (equipoFantasia.getTitulares());
+		    		int puntostotales = 0;
+		    		jugador Capitan = equipoFantasia.getCapitan();
+		    		if (Capitan!=null) 
+		    		{
+		    		for(jugador j: Titulares)
+		    			{
+		    				puntostotales += j.getPuntos();
+		    			}
+		    		if (datos.puntosCapitan(Capitan))
+		    			{
+		    				puntostotales += 5;
+		    			}
+		    		equipoFantasia.setPuntos(puntostotales);
+		    		}
+	    		}
+			equipos.add(equipoFantasia);
+		}
+
+		Collections.sort(equipos, ((o1, o2) -> ((equipo) o2).getPuntos().compareTo(((equipo) o1).getPuntos())));
+
+		if (equipos.size()>0)
+		{
+		equipo maxEquipo = (equipo) equipos.get(0);
+
+		String nombreMaxEquipo = maxEquipo.getNombre();
+
+		String carpetaFecha = CarpetaFechas.getPath() + "/Fecha" + fecha;
+
+		File archivoMaxEquipo = new File(carpetaFecha, nombreMaxEquipo+".txt");
+
+		archivoMaxEquipo.createNewFile();
+		}
+	}
+	
+	
 	
 	public String consultarMejorEquipoFecha(int numeroFecha)
 	{
