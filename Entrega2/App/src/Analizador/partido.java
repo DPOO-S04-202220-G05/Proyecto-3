@@ -72,10 +72,12 @@ public class partido {
 		ArrayList<String> nombresl = new ArrayList<String>(setnombresl);
 		for(String nombre: nombresl)
 			{
+				jugador jugadorf = persistencia.consultarJugador(nombre);
 				desempenio desempenioj = this.desemepenioEquipoLocal.get(nombre);
 				jugador jugadorj = persistencia.consultarJugador(nombre);
 				String posicion = jugadorj.getPosicion();
 				int puntosj = desempenioj.calculadoraPuntos(posicion);
+				puntosj += jugadorf.getPuntos();
 				jugadorj.setPuntos(puntosj);
 				persistencia.cargarJugador(jugadorj);
 			}
@@ -83,10 +85,12 @@ public class partido {
 		ArrayList<String> nombresv = new ArrayList<String>(setnombresv);
 		for(String nombre: nombresv)
 			{
+				jugador jugadorf = persistencia.consultarJugador(nombre);
 				desempenio desempenioj = this.desemepenioEquipoVisitante.get(nombre);
 				jugador jugadorj = persistencia.consultarJugador(nombre);
 				String posicion = jugadorj.getPosicion();
 				int puntosj = desempenioj.calculadoraPuntos(posicion);
+				puntosj += jugadorf.getPuntos();
 				jugadorj.setPuntos(puntosj);
 				persistencia.cargarJugador(jugadorj);
 			}

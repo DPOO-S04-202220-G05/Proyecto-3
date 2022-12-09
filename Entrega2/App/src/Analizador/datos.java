@@ -135,9 +135,12 @@ public class datos {
 			int penaltisErrados = Integer.parseInt(infoJugador[9]);
 			int tarjetasAmarillas = Integer.parseInt(infoJugador[10]);
 			int tarjetasRojas = Integer.parseInt(infoJugador[11]);
+			int manos = Integer.parseInt(infoJugador[12]);
+			int tirosLibres = Integer.parseInt(infoJugador[13]);
+			int golTiroLibre = Integer.parseInt(infoJugador[14]);
 			
 
-			desempenio desempenioJugador = new desempenio(cantidadMinutos, goles, penaltis, autogoles, asistencias, golesRecibidos, penaltisRecibidos, penaltisAtajados, penaltisErrados, tarjetasAmarillas, tarjetasRojas);
+			desempenio desempenioJugador = new desempenio(cantidadMinutos, goles, penaltis, autogoles, asistencias, golesRecibidos, penaltisRecibidos, penaltisAtajados, penaltisErrados, tarjetasAmarillas, tarjetasRojas, manos, tirosLibres, golTiroLibre);
 
 			if(equipo.equals(equipoLocal))
 			{

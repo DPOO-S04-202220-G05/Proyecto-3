@@ -1,24 +1,24 @@
-equipo;"jugador,""1-cantidadMinutos"",""2-goles"",""3-penaltis"",""4-autogoles"",""5-asistencias"",""6-golesRecibidos"",""7-penaltisRecibidos"",""8-penaltisAtajados"",""9-penaltisErrados"",""10-tarjetasAmarillas"",""11-tarjetasRojas"""
+equipo;"jugador,""1-cantidadMinutos"",""2-goles"",""3-penaltis"",""4-autogoles"",""5-asistencias"",""6-golesRecibidos"",""7-penaltisRecibidos"",""8-penaltisAtajados"",""9-penaltisErrados"",""10-tarjetasAmarillas"",""11-tarjetasRojas"",""12-manos"",""13-tirosLibres"",""14-golTiroLibre"""
 Club Olimpia,Parma,12/01/2022,15:30,3;
-Club Olimpia;T. Shibuya,90,0,0,0,0,0,0,0,0,0,0
-Club Olimpia;M. te Wierik,90,0,0,0,0,0,0,0,0,0,0
-Club Olimpia;O. Gallacher,90,0,0,0,0,0,0,0,0,1,0
-Club Olimpia;R. Millen,90,0,0,0,0,0,0,0,0,1,0
-Club Olimpia;Hong Jeong Ho,90,0,0,0,0,0,0,0,0,1,0
-Club Olimpia;A. Karimi,90,0,0,0,0,0,0,0,0,0,0
-Club Olimpia;F. Hinestroza,90,0,0,0,0,0,0,0,0,0,0
-Club Olimpia;Pimentiscinho,90,0,0,0,1,0,0,0,0,0,0
-Club Olimpia;Lee Yeong Jae,90,1,0,0,1,0,0,0,0,0,0
-Club Olimpia;M. Majrashi,90,0,0,0,0,0,0,0,0,0,0
-Club Olimpia;M. Ikeda,90,1,0,0,0,0,0,0,0,0,0
-Parma;L. Margueron,90,1,0,0,0,2,0,0,0,0,0
-Parma;Yao Daogang,90,0,0,0,0,2,0,0,0,1,0
-Parma;Jeong Dong Ho,60,0,0,0,0,2,0,0,0,0,1
-Parma;V. Latinovich,90,0,0,0,0,2,0,0,0,0,0
-Parma;Wendell,90,0,0,0,0,2,0,0,0,0,0
-Parma;A. Stahl,90,0,0,0,0,2,0,0,0,0,0
-Parma;R. Watson,90,0,0,0,0,2,0,0,0,0,0
-Parma;R. Fenlon,45,0,0,0,0,2,0,0,0,0,0
-Parma;M. Watai,90,0,0,0,0,2,0,0,0,0,0
-Parma;A. Cabeza,60,0,0,0,0,2,0,0,0,0,0
-Parma;A. La Mantia,75,0,0,0,0,2,0,0,0,0,0
+Club Olimpia;T. Shibuya,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+Club Olimpia;M. te Wierik,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+Club Olimpia;O. Gallacher,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+Club Olimpia;R. Millen,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+Club Olimpia;Hong Jeong Ho,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+Club Olimpia;A. Karimi,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+Club Olimpia;F. Hinestroza,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+Club Olimpia;Pimentiscinho,90,0,0,0,1,0,0,0,0,0,0,0,0,0
+Club Olimpia;Lee Yeong Jae,90,1,0,0,1,0,0,0,0,0,0,0,0,0
+Club Olimpia;M. Majrashi,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+Club Olimpia;M. Ikeda,90,1,0,0,0,0,0,0,0,0,0,0,0,0
+Parma;L. Margueron,90,1,0,0,0,2,0,0,0,0,0,2,2,1
+Parma;Yao Daogang,90,0,0,0,0,2,0,0,0,1,0,0,0,0
+Parma;Jeong Dong Ho,60,0,0,0,0,2,0,0,0,0,1,0,0,0
+Parma;V. Latinovich,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;Wendell,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;A. Stahl,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;R. Watson,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;R. Fenlon,45,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;M. Watai,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;A. Cabeza,60,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;A. La Mantia,75,0,0,0,0,2,0,0,0,0,0,0,0,0

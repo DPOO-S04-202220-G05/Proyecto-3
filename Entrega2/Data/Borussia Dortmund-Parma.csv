@@ -1,24 +1,24 @@
-equipo;"jugador,""1-cantidadMinutos"",""2-goles"",""3-penaltis"",""4-autogoles"",""5-asistencias"",""6-golesRecibidos"",""7-penaltisRecibidos"",""8-penaltisAtajados"",""9-penaltisErrados"",""10-tarjetasAmarillas"",""11-tarjetasRojas"""
+equipo;"jugador,""1-cantidadMinutos"",""2-goles"",""3-penaltis"",""4-autogoles"",""5-asistencias"",""6-golesRecibidos"",""7-penaltisRecibidos"",""8-penaltisAtajados"",""9-penaltisErrados"",""10-tarjetasAmarillas"",""11-tarjetasRojas"",""12-manos"",""13-tirosLibres"",""14-golTiroLibre"""
 Borussia Dortmund,Parma,11/01/2022,15:30,2;
-Borussia Dortmund;A. Gremsl,90,0,0,0,0,0,0,0,0,0,0
-Borussia Dortmund;Park Joo Ho,90,0,0,0,0,0,0,0,0,0,0
-Borussia Dortmund;Kim Sang Won,60,0,0,0,0,0,0,0,0,1,0
-Borussia Dortmund;R. Inniss,90,0,0,0,0,0,0,0,0,1,0
-Borussia Dortmund;J. Lourenco,90,0,0,0,0,0,0,0,0,1,0
-Borussia Dortmund;Danisco Fachini,40,0,0,0,0,0,0,0,0,0,0
-Borussia Dortmund;L. Sibley,90,0,0,0,1,0,0,0,0,0,0
-Borussia Dortmund;T. Suzuki,90,0,0,0,1,0,0,0,0,0,0
-Borussia Dortmund;K. Nishiya,70,0,0,0,0,0,0,0,0,0,0
-Borussia Dortmund;K. de la Fuente,90,1,0,0,0,0,0,0,0,0,0
-Borussia Dortmund;R. Emond,90,1,0,0,0,0,0,0,0,0,0
-Parma;L. Margueron,90,1,0,0,0,2,0,0,0,0,0
-Parma;Yao Daogang,90,0,0,0,0,2,0,0,0,1,0
-Parma;Jeong Dong Ho,60,0,0,0,0,2,0,0,0,0,1
-Parma;V. Latinovich,90,0,0,0,0,2,0,0,0,0,0
-Parma;Wendell,90,0,0,0,0,2,0,0,0,0,0
-Parma;A. Stahl,90,0,0,0,0,2,0,0,0,0,0
-Parma;R. Watson,90,0,0,0,0,2,0,0,0,0,0
-Parma;R. Fenlon,45,0,0,0,0,2,0,0,0,0,0
-Parma;M. Watai,90,0,0,0,0,2,0,0,0,0,0
-Parma;A. Cabeza,60,0,0,0,0,2,0,0,0,0,0
-Parma;A. La Mantia,75,0,0,0,0,2,0,0,0,0,0
+Borussia Dortmund;A. Gremsl,90,0,0,0,0,0,0,0,0,0,0,0,2,1
+Borussia Dortmund;Park Joo Ho,90,0,0,0,0,0,0,0,0,0,0,0,0,0
+Borussia Dortmund;Kim Sang Won,60,0,0,0,0,0,0,0,0,1,0,0,1,2
+Borussia Dortmund;R. Inniss,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+Borussia Dortmund;J. Lourenco,90,0,0,0,0,0,0,0,0,1,0,0,0,0
+Borussia Dortmund;Danisco Fachini,40,0,0,0,0,0,0,0,0,0,0,0,0,0
+Borussia Dortmund;L. Sibley,90,0,0,0,1,0,0,0,0,0,0,0,0,0
+Borussia Dortmund;T. Suzuki,90,0,0,0,1,0,0,0,0,0,0,0,0,0
+Borussia Dortmund;K. Nishiya,70,0,0,0,0,0,0,0,0,0,0,0,0,0
+Borussia Dortmund;K. de la Fuente,90,1,0,0,0,0,0,0,0,0,0,0,0,0
+Borussia Dortmund;R. Emond,90,1,0,0,0,0,0,0,0,0,0,0,0,0
+Parma;L. Margueron,90,1,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;Yao Daogang,90,0,0,0,0,2,0,0,0,1,0,0,0,0
+Parma;Jeong Dong Ho,60,0,0,0,0,2,0,0,0,0,1,0,0,0
+Parma;V. Latinovich,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;Wendell,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;A. Stahl,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;R. Watson,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;R. Fenlon,45,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;M. Watai,90,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;A. Cabeza,60,0,0,0,0,2,0,0,0,0,0,0,0,0
+Parma;A. La Mantia,75,0,0,0,0,2,0,0,0,0,0,0,0,0
