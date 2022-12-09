@@ -26,7 +26,7 @@ public class ReportesPrincipal {
 		window = new JFrame();
 		window.setTitle("Reportes");
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        window.setSize(350, 400);
+        window.setSize(600, 600);
         window.setLocationRelativeTo(null);
         
         JPanel panel = new JPanel();
@@ -40,7 +40,7 @@ public class ReportesPrincipal {
         layout.fill = GridBagConstraints.HORIZONTAL;
         layout.gridx = 0;
         layout.gridy = 0;
-        layout.insets = new Insets(0, 0, 50, 0);
+        layout.insets = new Insets(0, 50, 50, 50);
         panel.add(label, layout);
         
         JButton botonPuntos = new JButton("Comparacion por puntos totales");
@@ -82,14 +82,74 @@ public class ReportesPrincipal {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-                window.setVisible(false);
+               
+            }
+            
+        });
+        
+        JButton botonPuntosPorFecha = new JButton("Comparacion de puntos por fecha");
+        layout.fill = GridBagConstraints.HORIZONTAL;
+        layout.gridx = 0;
+        layout.gridy = 3;
+        panel.add(botonPuntosPorFecha, layout);
+        botonPuntosPorFecha.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+					FechasParaReporte ventanaFechas = new FechasParaReporte(controller,window);
+					window.setVisible(false);
+					ventanaFechas.show();
+                } catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                
+            }
+            
+        });
+        
+        JButton botonDesempenioJugadores = new JButton("Desempenio de jugadores");
+        layout.fill = GridBagConstraints.HORIZONTAL;
+        layout.gridx = 1;
+        layout.gridy = 1;
+        panel.add(botonDesempenioJugadores, layout);
+        botonDesempenioJugadores.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+					MostrarEquiposParaReporte ventanaEquipos = new MostrarEquiposParaReporte(controller,window);
+					window.setVisible(false);
+					ventanaEquipos.show();
+                
+                } catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                
+            }
+            
+        });
+        
+        JButton botonComparativoVentas = new JButton("Comparacion de ventas");
+        layout.fill = GridBagConstraints.HORIZONTAL;
+        layout.gridx = 1;
+        layout.gridy = 2;
+        panel.add(botonComparativoVentas, layout);
+        botonComparativoVentas.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                
             }
             
         });
         
         JButton volver = new JButton("Volver");
         layout.fill = GridBagConstraints.HORIZONTAL;
-        layout.gridx = 0;
+        layout.gridx = 1;
         layout.gridy = 3;
         panel.add(volver, layout);
         volver.addActionListener(new ActionListener(){
