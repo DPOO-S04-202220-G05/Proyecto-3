@@ -63,8 +63,6 @@ public class datos {
 		
 		if (archivosTemporadas.size()>0) 
 		{
-			File podio = new File("Temporadas/Temporada"+(numeroTemporadaActual+1)+"/podio.txt");
-			podio.createNewFile();
 			ArrayList<File> ArchivosReales = persistencia.consultarEquiposReales2();
 			datos logica = new datos();
 			ArrayList<equipo> EquiposReales = new ArrayList<equipo>();
@@ -96,13 +94,39 @@ public class datos {
 				puntos.remove(mayor);
 				centinela+=1;
 			}
-    		FileWriter lstWriter = new FileWriter("Temporadas/Temporada"+(numeroTemporadaActual+1)+"/podio.txt",true);
-			for(String p: top)
+			String Equipo1 = top[0];
+			String Equipo2 = top[1];
+			String Equipo3 = top[2];
+			for(equipo e: EquiposReales)
 			{
-	    		lstWriter.append("\n"+p);
+				if(e.getNombre().equals(Equipo1))
+				{
+					ArrayList<jugador> jugadores1 = e.getJugadores();
+					for(jugador j: jugadores1)
+					{
+						j.setPuntos(10);
+						cargarJugador(j);
+					}
+				}
+				else if(e.getNombre().equals(Equipo2))
+				{
+					ArrayList<jugador> jugadores2 = e.getJugadores();
+					for(jugador j: jugadores2)
+					{
+						j.setPuntos(7);
+						cargarJugador(j);
+					}
+				}
+				else if(e.getNombre().equals(Equipo3))
+				{
+					ArrayList<jugador> jugadores3 = e.getJugadores();
+					for(jugador j: jugadores3)
+					{
+						j.setPuntos(5);
+						cargarJugador(j);
+					}
+				}
 			}
-    		lstWriter.flush();
-    		lstWriter.close();
 		}
 
         try (Scanner line = new Scanner(archivoTemporada)) {
