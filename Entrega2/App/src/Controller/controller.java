@@ -119,7 +119,7 @@ public class controller {
 			popup.compraExedeLimite();
 		}
 		
-		popup.presupuesto(PresuspuestoActual);;
+		popup.presupuesto(PresuspuestoActual);
     	datos.comprarJugador(EquipoUsu, Comprado);
     }
     
