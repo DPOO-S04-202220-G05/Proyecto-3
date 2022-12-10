@@ -1286,7 +1286,7 @@ public class paqueteDatos {
 				ArrayList<String> Separacion = new ArrayList<String>(Arrays.asList(NombreArchivo.split("_")));
 				ArrayList<String> NombresEquiposPartido = new ArrayList<String>(Arrays.asList((Separacion.get(0)).split("-")));
 				if(NombresEquiposPartido.size()==1) {}
-				if((nombreEquipo.equals(NombresEquiposPartido.get(0)))||(nombreEquipo.equals(NombresEquiposPartido.get(1))))
+				else if((nombreEquipo.equals(NombresEquiposPartido.get(0)))||(nombreEquipo.equals(NombresEquiposPartido.get(1))))
 				{
 					BufferedReader bufferLecturaPartido = new BufferedReader(new FileReader(nombreCarpeta+"/"+NombreArchivo));
 					String linea;
@@ -1333,7 +1333,8 @@ public class paqueteDatos {
 				String NombreArchivo = file.getName();
 				ArrayList<String> Separacion = new ArrayList<String>(Arrays.asList(NombreArchivo.split("_")));
 				ArrayList<String> NombresEquiposPartido = new ArrayList<String>(Arrays.asList((Separacion.get(0)).split("-")));
-				if((nombreEquipo.equals(NombresEquiposPartido.get(0)))||(nombreEquipo.equals(NombresEquiposPartido.get(1))))
+				if(NombresEquiposPartido.size()==1) {}
+				else if((nombreEquipo.equals(NombresEquiposPartido.get(0)))||(nombreEquipo.equals(NombresEquiposPartido.get(1))))
 				{
 					BufferedReader bufferLecturaPartido = new BufferedReader(new FileReader(nombreCarpeta+"/"+NombreArchivo));
 					String linea;
