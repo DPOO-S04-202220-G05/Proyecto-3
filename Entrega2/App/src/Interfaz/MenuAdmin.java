@@ -4,9 +4,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
+import Analizador.equipo;
 import Controller.controller;
 
 public class MenuAdmin {
@@ -78,8 +80,30 @@ public class MenuAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                ReportesPrincipal reportesVentana = new ReportesPrincipal(controller, window);
-               reportesVentana.show();
-                window.setVisible(false);
+               ArrayList<equipo> equipos;
+			try {
+				equipos = controller.obtenerEquiposFantasia();
+				if(!equipos.isEmpty())
+				{
+				  for(int i=0; i<equipos.size();i++)
+	               {
+	               equipo elequipo = equipos.get(i);
+	               controller.actualizarPuntos(elequipo);
+	               }
+	               reportesVentana.show();
+	                window.setVisible(false);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(window, "No hay equipos disponibles para elaborar reportes");
+				}
+				} catch (IOException e1) {
+				// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(window, "No hay equipos disponibles para elaborar reportes");
+				e1.printStackTrace();
+			}
+               
+             
             }
             
         });

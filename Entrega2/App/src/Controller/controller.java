@@ -1,13 +1,14 @@
 package Controller;
 
 import java.io.File;
-
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import Analizador.datos;
@@ -283,8 +284,42 @@ public class controller {
 	    			}
 	    		this.EquipoUsu.setPuntos(puntostotales);
 	    		datos.cargarEquipo(EquipoUsu);
+	    		
+	    		
+	    		//SE HACE PARA GUARDAR EN UNA CARPETA LOS PUNTOS GANADOS POR FEHCA
+	    		try {
+	    			File CarpetaPuntosFechas = new File("PuntosFechas");
+	    			if(!CarpetaPuntosFechas.exists())
+	    			{
+	    				CarpetaPuntosFechas.mkdir();
+	    			}
+	    			
+	    			ArrayList<String> cerradas = datos.consultarFechasCerradas();
+	    			int tamanio = cerradas.size();
+	    			String fechaActual = cerradas.get(tamanio-1);;
+	    			File Fechas = new File("PuntosFechas/"+fechaActual);
+	    			Fechas.mkdir();
+	    			FileWriter csvWriter = new FileWriter("PuntosFechas/"+ fechaActual +"/" + EquipoUsu.getNombre()+ "-" + puntostotales +  "-.txt");
+					csvWriter.flush();
+					csvWriter.close();
+	    		
+	    		
+	    		} catch (IOException e) {
+	    			JFrame window = new JFrame();
+	    			JOptionPane.showMessageDialog(window,"Aun no se ha creado la primera fecha, "
+	    					+ "o no hay datos suficientes para los reportes" );
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    		return EquipoUsu.getPuntos();
+	    		
+	    		
+	    		
+	    		
+	    		
 	    		}
+	    		
+	    		
     		}
 		return 0;
     }

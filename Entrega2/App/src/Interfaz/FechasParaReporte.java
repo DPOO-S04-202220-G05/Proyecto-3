@@ -49,6 +49,7 @@ public class FechasParaReporte {
 	        panel.add(label, layout);
 
 	        ArrayList<String> fechas = controller.consultarFechasCerradas();
+	        fechas.remove(0);
 	        Object[][] matriz = new Object[fechas.size()][];
 	        int centinela = 0;
 	        for(String fecha: fechas)
@@ -101,11 +102,11 @@ public class FechasParaReporte {
 	        window.setVisible(true);
 	    }
 	    class ButtonEditor extends DefaultCellEditor {
-
+	    	
 	        protected JButton button;
 	        private String label;
 	        private boolean isPushed;
-
+	        	
 	        public ButtonEditor(JCheckBox checkBox) {
 	            super(checkBox);
 	            button = new JButton();
@@ -137,17 +138,18 @@ public class FechasParaReporte {
 	        @Override
 	        public Object getCellEditorValue() {
 	        	controller controller = new controller();
-	        	String mejor="";
-	        	try {
-	    			mejor = controller.consultarMejorEquipoFecha(Integer.parseInt(label));
-	    		} catch (NumberFormatException | IOException e) {
-	    			// TODO Auto-generated catch block
-	    			e.printStackTrace();
-	    		}
 	            if (isPushed) 
 	            
 	            {
 	            	
+	            	try {
+						ReportePorPuntosFechas reporte = new ReportePorPuntosFechas(controller, Integer.parseInt(label));
+						reporte.show();
+	            	
+	            	} catch (NumberFormatException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 	            	
 	            	
 	            	
