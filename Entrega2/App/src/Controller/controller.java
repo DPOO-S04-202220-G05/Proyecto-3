@@ -108,7 +108,7 @@ public class controller {
     	jugador Comprado = jugadores.get(Integer.parseInt(numIntegrante)-1);
     	float PresuspuestoActual = EquipoUsu.getPresupuesto();
 		PopUps popup = new PopUps();
-		if(datos.verificarEquipo(EquipoUsu.getJugadores(), Comprado, 14))
+		if(datos.verificarEquipo(EquipoUsu.getJugadores(), Comprado, 15))
 		{
 			datos.comprarJugador(EquipoUsu, Comprado);
 			System.out.println("\n");
