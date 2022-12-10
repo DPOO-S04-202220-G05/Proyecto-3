@@ -1,5 +1,8 @@
 package Analizador;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Persistencia.paqueteDatos;
@@ -250,6 +253,23 @@ public class equipo {
 	    		}
 	    		this.removeTitular(TitularE);
 	    		this.Presupuesto+=precio*0.97;
+	    		
+	    		
+	    		try {
+	    			File CarpetaVentas = new File("Ventas");
+	    			if(!CarpetaVentas.exists())
+	    			{
+	    			CarpetaVentas.mkdir();
+	    			}
+	    			FileWriter csvWriter = new FileWriter("Ventas/" + Math.round(precio)+ "-" + (this.Nombre) +  "-.txt");
+					csvWriter.flush();
+					csvWriter.close();
+	    		
+	    		
+	    		} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    	}
     }
 

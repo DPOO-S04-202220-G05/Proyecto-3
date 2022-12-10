@@ -43,6 +43,7 @@ public class bestTeam {
         panel.add(label, layout);
 
         ArrayList<String> fechas = controller.consultarFechasCerradas();
+        fechas.remove(0);
         Object[][] matriz = new Object[fechas.size()][];
         int centinela = 0;
         for(String fecha: fechas)
